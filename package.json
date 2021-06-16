@@ -1,0 +1,27 @@
+{
+  "name": "design-3",
+  "version": "1.0.0",
+  "main": "truffle-config.js",
+  "scripts": {
+    "dev": "env-cmd backend/config/dev.env nodemon backend/index.js"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.4.0",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "env-cmd": "^8.0.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.8",
+    "multer": "^1.4.2",
+    "node": "^16.1.0",
+    "nodemon": "^2.0.7",
+    "sharp": "^0.28.3",
+    "truffle": "^5.3.10",
+    "validator": "^13.6.0",
+    "web3": "^1.3.6"
+  }
+}

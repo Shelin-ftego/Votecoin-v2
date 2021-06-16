@@ -1,0 +1,24 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 400%;
+    height: 400vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-inner{
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    background-color: antiquewhite;
+}
+
+.modal-inner .close-btn{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}

@@ -16,12 +16,12 @@ const Voterroll = function (props){
                 "Authorization": "Bearer "+ token
               }
             }
-            //const image = await axios.get(`/admin/voters/${idnumber}/id`, config)
-            //const imagetag = image.data.toString('base64')
-            const imagetag=`http://localhost:3000/blockchain/admin/voters/${idnumber}/id`
+            const image = await axios.get(`/admin/voters/${idnumber}/id`, config)
+            const imagetag = image.data.toString('base64')
+            //const imagetag=`http://localhost:3000/blockchain/admin/voters/${idnumber}/id`
             setImage(imagetag)
             togglemodal(true)
-            console.log(image.data.toString())
+            console.log(image)
           }
           catch(e){
             console.log(e)
@@ -63,6 +63,7 @@ const Voterroll = function (props){
                                       padding: '100px'
                                     }}} ariaHideApp={false}>
                 <h1>{props.ID}</h1>
+                <h2>{image}</h2>
                 <img src ={{uri:`data:image/gif;base64,${image}`}} ></img>
               <button onClick = {()=>togglemodal(false)}>Close image</button>
           </Modal>

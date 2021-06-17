@@ -157,7 +157,7 @@ router.patch('/admin/:id/voter-auth', authentication, async(req, res)=>{
 })
 
 //create an api for getting image of voter
-router.get('/admin/voters/:id/id', authentication, async (req, res)=>{
+router.get('/admin/voters/:id/id', async (req, res)=>{
     try{
         const voter = await Voter.findforAdmin(req.params.id)
         if(!voter){
@@ -167,28 +167,31 @@ router.get('/admin/voters/:id/id', authentication, async (req, res)=>{
         if(!voter.Id_image){
             return res.send()
         }
+        const image_data = Buffer.from(voter.Id_image, 'base64')
+        console.log(image_data)
         res.set('Content-Type', 'image/png')
-        res.send(voter.Id_image)
-
+        res.status(200).send(image_data)
     }
     catch(e){
+        console.log(e)
         res.status(404).send()
     }
 })
 
 //create an api for getting seflie of voter
-router.get('/admin/voters/:id/selfie', authentication, async (req, res)=>{
+router.get('/admin/voters/:id/selfie', async (req, res)=>{
     try{
         const voter = await Voter.findforAdmin(req.params.id)
         if(!voter){
             throw new Error()
         }
         if(!voter.Selfie_image){
-            return res.send()
+            return res.send("1")
         }
+        const image_data = Buffer.from(voter.Selfie_image, 'base64')
+        console.log(image_data)
         res.set('Content-Type', 'image/png')
-        res.send(voter.Selfie_image)
-
+        res.status(200).send(image_data)
     }
     catch(e){
         res.status(404).send("There is no image available")

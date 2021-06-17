@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const Voterroll = function (props){
     const [image, setImage] = useState(null)
+    const [selfie, setSelfie] = useState(null)
     const [openmodal, togglemodal] = useState(false)
     
     const displayid = async(idnumber)=>{
@@ -16,16 +17,20 @@ const Voterroll = function (props){
                 "Authorization": "Bearer "+ token
               }
             }
-            const image = await axios.get(`/admin/voters/${idnumber}/id`, config)
-            const imagetag = image.data.toString('base64')
+            setImage(1)
+            const raw_image_data = await axios.get(`/admin/voters/${idnumber}/id`, config)
             //const imagetag=`http://localhost:3000/blockchain/admin/voters/${idnumber}/id`
-            setImage(imagetag)
+            const image_data = new Buffer(raw_image_data.data).toString('base64')
+            const new_image_string = "http://localhost:4000/admin/voters/"+ idnumber.toString()+"/id"
+            const new_seflie_string = "http://localhost:4000/admin/voters/"+ idnumber.toString()+"/selfie"
+            setImage(new_image_string)
+            setSelfie(new_seflie_string)
             togglemodal(true)
+            console.log(image_data)
             console.log(image)
           }
           catch(e){
             console.log(e)
-            setImage(null)
             togglemodal(true)
           }
     }
@@ -62,9 +67,19 @@ const Voterroll = function (props){
                                       bottom: '50px',
                                       padding: '100px'
                                     }}} ariaHideApp={false}>
-                <h1>{props.ID}</h1>
-                <h2>{image}</h2>
-                <img src ={{uri:`data:image/gif;base64,${image}`}} ></img>
+                <div>
+                  <h1>{props.ID}</h1>
+                </div>
+                <div>
+                   <h2> Identity document</h2>     
+                   <img src ={image} ></img>              
+                </div>
+                <div>
+                   <h2> Selfie</h2>     
+                   <img src ={selfie} ></img>  
+                </div>
+
+                
               <button onClick = {()=>togglemodal(false)}>Close image</button>
           </Modal>
         </div>

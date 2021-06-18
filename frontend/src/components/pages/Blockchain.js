@@ -22,7 +22,6 @@ function Blockchain() {
         {National_id:'9905694209087',Name:'Michale' ,Surname:'Paul'},
         {National_id:'9905698339087',Name:'Sipho' ,Surname:'Mazibuko'}
     ]);
-    const [IDimage, setIDImage] = useState(null)
 
     const getVoters = async()=>{
         try{

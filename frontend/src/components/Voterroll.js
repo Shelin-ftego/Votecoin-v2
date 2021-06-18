@@ -17,7 +17,6 @@ const Voterroll = function (props){
                 "Authorization": "Bearer "+ token
               }
             }
-            setImage(1)
             const raw_image_data = await axios.get(`/admin/voters/${idnumber}/id`, config)
             //const imagetag=`http://localhost:3000/blockchain/admin/voters/${idnumber}/id`
             const image_data = new Buffer(raw_image_data.data).toString('base64')

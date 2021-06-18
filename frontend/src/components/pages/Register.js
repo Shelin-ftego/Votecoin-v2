@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import '../../App.css';
 import Footer from '../Footer';
@@ -7,132 +7,116 @@ import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import axios from 'axios'
 //import Dropzone from 'react-dropzone';
-
-  function Register() {
-  const history = useHistory();
-  const registerstyle={
-    color:'blue'
-  };
-  const [ID,setID] = useState()
-  const [name,setName] = useState()
-  const [surname,setSurname] = useState()
-  const [age,setAge] = useState()
-  const [dob,setdob] = useState()
-  const [province,setProvince] = useState()
-  const [municipality,setMunicipality] = useState()
-  const [ward,setWard] = useState()
-  const [district,setDistrict] = useState()
-  const [password,setPassword] = useState()
-  const [confrim,setConfirm] = useState()
-  const handleSubmit = event => {
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handlesumbit'(create a function and call it there)
+*/
+  class Register extends Component{
+  state = { ID: 0, name: 0, surname:0, age:0, dob:0, province:undefined, municipality:undefined
+          , ward:undefined, district:undefined, password:undefined, confirmi:undefined };
+          submitVoter = async()=>{
+            try{
+              const registerstyle={
+                color:'blue'
+              };
+              //add checks for all states to ensure that all fields have been filled out
+              if(this.state.password!= this.state.confirmi){
+                throw new Error("Passwords do not match");
+              }
+              const newVoter = {
+                  National_id : this.state.ID,
+                  Name : this.state.name,
+                  Surname : this.state.surname,
+                  Age : this.state.age,
+                  Date_of_Birth : this.state.dob,
+                  Address : {
+                      Province : this.state.province,
+                      Municipality : this.state.municipality,
+                      Ward : this.state.ward,
+                      District : this.state.district,
+                  },
+                  Password : this.state.password 
+              }
+              const config1 ={
+                headers:{
+                  "Content-type": "application/json",
+                }
+              }
+              const response = await axios.post('/voter/register', JSON.stringify(newVoter), config1)
+              localStorage.setItem('token', response.data.token )
+              console.log(localStorage.getItem('token'))
+            }
+            catch(e){
+              console.log(e)
+            }
+          }
+  handleSubmit = event => {
+  
     event.preventDefault()
-    submitVoter()
-    //submitImageID()
+    this.submitVoter()
     
     };
     
-  const submitVoter = async()=>{
-    try{
-      //console.log({idimage}.idimage)
-      //add checks for all states to ensure that all fields have been filled out
-      if({password}.password!={confrim}.confrim){
-        throw new Error("Passwords do not match");
-      }
-      const newVoter = {
-          National_id : {ID}.ID,
-          Name : {name}.name,
-          Surname : {surname}.surname,
-          Age : {age}.age,
-          Date_of_Birth : {dob}.dob,
-          Address : {
-              Province : {province}.province,
-              Municipality : {municipality}.municipality,
-              Ward : {ward}.ward,
-              District : {district}.district,
-          },
-          Password : {password}.password  
-      }
-      const config1 ={
-        headers:{
-          "Content-type": "application/json",
-        }
-      }
-      const response = await axios.post('/voter/register', JSON.stringify(newVoter), config1)
-      localStorage.setItem('token', response.data.token )
-      console.log(localStorage.getItem('token'))
-      history.push('/')
-    }
-    catch(e){
-      console.log(e)
-    }
-  }
+  
   
 
-
+  render(){
   return(
-   <div> 
-   <Navbar/>
-   <form onSubmit={handleSubmit}>
-      <div>
-        <h3>ID Number</h3>
-          <input type="text" onChange={(e) => setID(e.target.value)}/>
-      </div>
-      <div>
-        <h3>Name</h3>
-          <input type="text" onChange={(e) => setName(e.target.value)}/>
-      </div>
-      <div>
-        <h3>Surname</h3>
-          <input type="text" onChange={(e) => setSurname(e.target.value)}/>
-      </div>
-      <div>
-        <h3>Age</h3>
-          <input type="text" onChange={(e) => setAge(e.target.value)}/>
-      </div>
-      <div>
-        <h3>Date of Birth(YYYY/MM/DD)</h3>
-          <input type="text" onChange={(e) => setdob(e.target.value)}/>
-      </div>
-      <div>
-        <h2>Address</h2>
-          <div>
-            <h3>Province</h3>
-              <input type="text" onChange={(e) => setProvince(e.target.value)}/>
-          </div>
-          <div>
-            <h3>Municipality</h3>
-              <input type="text" onChange={(e) => setMunicipality(e.target.value)}/>
-          </div>
-          <div>
-            <h3>Ward</h3>
-              <input type="text" onChange={(e) => setWard(e.target.value)}/>
-          </div>
-          <div>
-            <h3>Distinct</h3>
-              <input type="text" onChange={(e) => setDistrict(e.target.value)}/>
-          </div>
-      </div>
-      <div>
-          <h3>Password</h3>
-            <input type="password" onChange={(e) => setPassword(e.target.value)}/>
-      </div>
-      <div>
-          <h3>Confirmed Password</h3>
-            <input type="password" onChange={(e) => setConfirm(e.target.value)}/>
-      
-      {/*<h3>Document uploads</h3>*/}
-        {/*<label>Upload ID(PNG): </label>
-        <input type='file'onChange={(e)=>setImage(e.target.files[0])}/>
-        <label>Upload Selfie(PNG): </label>
-        <input type='file'onChange={(e)=>setSelfie(e.target.files[0])}/>
-        <Link to='/upload'>
-        <Button type='submit' color='inherit' variant="contained" >Upload Images</Button>
-         </Link> */}     
-      </div>
-      <Button type='submit' color='inherit' variant="contained" fullWidth >Register</Button>
-    </form>
-  <Footer/>
-  </div>);
+    <div> 
+    <Navbar/>
+    <form onSubmit={this.handleSubmit}>
+        <div>
+          <h3>ID Number</h3>
+            <input type="text" onChange={(e) => this.setState({ID:e.target.value})}/>
+        </div>
+        <div>
+          <h3>Name</h3>
+            <input type="text" onChange={(e) => this.setState({name:e.target.value})}/>
+        </div>
+        <div>
+          <h3>Surname</h3>
+            <input type="text" onChange={(e) => this.setState({surname:e.target.value})}/>
+        </div>
+        <div>
+          <h3>Age</h3>
+            <input type="text" onChange={(e) => this.setState({age:e.target.value})}/>
+        </div>
+        <div>
+          <h3>Date of Birth(YYYY/MM/DD)</h3>
+            <input type="text" onChange={(e) => this.setState({dob:e.target.value})}/>
+        </div>
+        <div>
+          <h2>Address</h2>
+            <div>
+              <h3>Province</h3>
+                <input type="text" onChange={(e) => this.setState({province:e.target.value})}/>
+            </div>
+            <div>
+              <h3>Municipality</h3>
+                <input type="text" onChange={(e) => this.setState({municipality:e.target.value})}/>
+            </div>
+            <div>
+              <h3>Ward</h3>
+                <input type="text" onChange={(e) => this.setState({ward:e.target.value})}/>
+            </div>
+            <div>
+              <h3>Distinct</h3>
+                <input type="text" onChange={(e) => this.setState({district:e.target.value})}/>
+            </div>
+        </div>
+        <div>
+            <h3>Password</h3>
+              <input type="password" onChange={(e) => this.setState({password:e.target.value})}/>
+        </div>
+        <div>
+            <h3>Confirmed Password</h3>
+              <input type="password" onChange={(e) => this.setState({confirmi:e.target.value})}/>    
+        </div>
+          <Button type='submit' color='inherit' variant="contained" fullWidth >Register</Button>
+      </form>
+    <Footer/>
+    </div>);
+  }
 }
 
 export default Register

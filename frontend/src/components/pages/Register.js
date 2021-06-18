@@ -51,7 +51,6 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
             }
           }
   handleSubmit = event => {
-  
     event.preventDefault()
     this.submitVoter()
     

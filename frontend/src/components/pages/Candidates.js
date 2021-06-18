@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import NavbarA from '../NavbarA';
 
-
+//////////////////////////////USE ADDCANDIDATES PAGE INSTEAD
 function Candidates() {
     const [print,setPrint] = useState(null);
     const [data,setData] = useState(null);

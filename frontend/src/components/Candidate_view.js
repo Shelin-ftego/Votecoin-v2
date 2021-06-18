@@ -1,16 +1,31 @@
-import React, {useState, useEffect} from 'react'
-import Modal from 'react-modal';
+import React, {useState, useEffect, Component} from 'react';
+import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
+import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import axios from 'axios'
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBContainer } from "mdbreact";
 
-const Candidate_view = function (props){
-    const [image, setImage] = useState(null)
-    const [openmodal, togglemodal] = useState(false)
 
-    return(
-        <div>
-             <h3>PartyName: {props.PartyName} Name: {props.Name} Surname: {props.Surname}</h3>
-        </div>
-    )
+class Candidate_view extends Component{
+ 
+  render(){
+   return(
+    <div>
+    <MDBContainer>
+  <MDBCard>
+   <MDBCardBody>
+   <MDBCardTitle>Your Party is :{this.props.PartyName}</MDBCardTitle>
+   <MDBCardTitle>
+   Person name : {this.props.Name}
+      </MDBCardTitle>
+      <button>Vote</button>
+      </MDBCardBody>
+  </MDBCard>
+</MDBContainer>
+   </div>
+   )
+  }
 }
 
 export default Candidate_view
+

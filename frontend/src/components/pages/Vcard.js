@@ -18,7 +18,7 @@ const cards = [
   {
     id: 2,
     avatar:
-      "https://rationalstandard.com/wp-content/uploads/2016/07/DA.jpg",
+      "https://www.talkofthetown.co.za/wp-content/uploads/2016/06/DA_logo7.jpg",
     date: "Founded in 2000",
     header: "Democratic Alliance",
     description: "One Nation. One Future.",

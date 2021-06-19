@@ -98,7 +98,7 @@ class ElectionS extends Component{
             <Paper elevation={10} style={paperStyle}>
             <Grid align='center'>
                         <Avatar style={avatarStyle}><ThumbUpIcon/></Avatar>
-                        <h1>VOTING STATUS: {this.state.status}</h1>
+                        <h1 align='center'>VOTING STATUS: {this.state.status}</h1>
             </Grid>
         <Grid align='center'>
         <Button align='left' type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.handleStartSubmit}>Start Voting Period</Button>
@@ -108,7 +108,7 @@ class ElectionS extends Component{
         <Button alight='right' type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.handleStopSubmit}>End Voting Period</Button>
         </Grid>
         <br/>
-        <Typography > 
+        <Typography align='center'> 
              Providing the admin with the ability to stop and start the voting period
                     </Typography>
          <br/>        

@@ -102,55 +102,33 @@ router.post('/voter/logout', authentication1, async(req, res)=>{
 
 //IDEA: Have to different authentication functions: one for users that haven;t been verified yet, and one for those who have 
 //voting page
-router.get('/voter/vote', authentication2, async (req, res)=>{
-    //send a resposne for now
-    res.send('Cast your vote here')
-    //render the voting page page
-    //res.render() ...
-})
-
-router.post('/voter/vote', authentication2, async(req, res)=>{
+//THIS STILL NEEDS TO BE TESTED
+router.post('/voter/vote', authentication2, async (req, res)=>{
     try{
-        //send a resposne for now
-        res.send('You have voted')
-        //call the web3 funciton for voting
-        //
+        if(req.voter.Voted){
+            throw new Error('You have already voted')
         }
-        catch(e){
-            res.status(500).send("Blockchain API is not working")
-        }
-})
-
-//results page
-//this page will display results from the blockchain
-router.get('/voter/results',authentication2, async (req, res)=>{
-    try{
-    //send a resposne for now
-    res.status(200).send('Voting Page')
+        req.voter.Voted = true
+        await req.voter.save()
+        res.send("voted")
     }
     catch(e){
-        res.status(500).send("Blockchain API is not working")
+        res.status(400).send(e)
+        console.log(e)
     }
-    
 })
 
-//verification
-//this page will prompt the user for key to verify result
-router.get('/voter/verify', authentication2, async (req, res)=>{
-    //send a resposne for now
-    res.status(200).send('Show that result has been counted')
-})
+// router.post('/voter/vote', authentication2, async(req, res)=>{
+//     try{
+//         //send a resposne for now
+//         res.send('You have voted')
+//         //call the web3 funciton for voting
+//         //
+//         }
+//         catch(e){
+//             res.status(500).send("Blockchain API is not working")
+//         }
 
-//verfication with web3 function
-router.get('/voter/verify/:key', authentication2, async (req, res)=>{
-    const publickey = req.params.key
-    try{
-    //send a resposne for now
-    res.status(200).send('Show that result has been counted')
-    }
-    catch(e){
-        res.status(500).send("Blockchain API is not working")
-    }
-})
+// })
 
 module.exports = router

@@ -10,7 +10,7 @@ function Admin() {
     const avatarStyle={backgroundColor:'#1bbd7e'};
     const btnstyle={margin:'8px 0'};
     return (
-        <div>
+        <div >
             <NavbarA/>
             <Grid>
                 <Paper elevation={10} style={paperStyle}>

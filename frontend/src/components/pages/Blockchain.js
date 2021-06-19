@@ -1,10 +1,11 @@
-import { Grid } from '@material-ui/core';
 import React, {useState, useEffect} from 'react'
 import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
-import NavbarA from '../NavbarA'
+import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
+import NavbarA from '../NavbarA';
 import Voterroll from '../Voterroll';
 import axios from 'axios'
 import Modal from 'react-modal';
+
 
 
 // const users =[
@@ -47,15 +48,23 @@ function Blockchain() {
         console.log(response)
         }, [])
 
+        const paperStyle={padding :20,height:'120vh',width:900, margin:"20px auto"};
+        const avatarStyle={backgroundColor:'#1bbd7e'};
+        const btnstyle={margin:'8px 0'};
 
     return (
         <div>
           <NavbarA/>
-          <h1>Unverified Voters</h1>
+          
         <Grid>
+          <Paper elevation={10} style={paperStyle}>
+          <Grid align='center'>
+          <h1>Unverified Voters</h1>
+          </Grid>
           {
               users.map((user) => <Voterroll ID={user.National_id} Name={user.Name} Surname={user.Surname} />)
           }
+          </Paper>
         </Grid>
         <div>
           {/* <Modal isOpen ={openmodal}  style={{content: {

@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import Modal from 'react-modal';
-import axios from 'axios'
+import axios from 'axios';
+import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
 
 const Voterroll = function (props){
     const [image, setImage] = useState(null)
     const [selfie, setSelfie] = useState(null)
     const [openmodal, togglemodal] = useState(false)
+    const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"};
+    const avatarStyle={backgroundColor:'#1bbd7e'};
+    const btnstyle={margin:'8px 0'};
     
     const displayid = async(idnumber)=>{
         try{
@@ -56,7 +60,7 @@ const Voterroll = function (props){
         <div>
             <h1>  </h1>
             <h3>ID: {props.ID} Name: {props.Name} Surname: {props.Surname}</h3>
-            <button onClick={displayid.bind(this,props.ID)}>View ID</button> <button onClick={auth.bind(this, props.ID)}>Authenticate User</button>
+            <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={displayid.bind(this,props.ID)}>View ID</Button> <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={auth.bind(this, props.ID)}>Authenticate User</Button>
             <Modal isOpen ={openmodal}  style={{content: {
                                       position: 'absolute',
                                       top: '100px',
@@ -78,7 +82,7 @@ const Voterroll = function (props){
                 </div>
 
                 
-              <button onClick = {()=>togglemodal(false)}>Close image</button>
+              <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick = {()=>togglemodal(false)}>Close image</Button>
           </Modal>
         </div>
     )

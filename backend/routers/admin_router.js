@@ -35,6 +35,22 @@ router.post('/admin/election-admin/candidate', authentication, async (req, res)=
     }
 })
 
+//add candidate image
+router.post('/admin/election-admin/:party/image', authentication, upload_image.single('image'), async(req, res)=>{
+    try{
+    //does not have to be here because we have authentication
+        const buffer = await sharp(req.file.buffer).png().toBuffer()
+        const candidate = await Candidate.find({Political_party:req.params.party})
+        candidate.Candidate_image = buffer
+        await candidate.save()
+        res.send()
+    }
+    catch(e){
+        console.log(e)
+        res.status(400).send(e)  
+    }
+})
+
 //get candidates
 router.get('/admin/election-admin/candidate', authentication, async (req, res)=>{
     try{

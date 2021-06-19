@@ -39,7 +39,7 @@ router.post('/voter/register', async(req, res)=>{
 router.post('/voter/upload/id', authentication1, upload_image.single('id'), async(req, res)=>{
     try{
     //does not have to be here because we have authentication
-        const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
+        const buffer = await sharp(req.file.buffer).png().toBuffer()
         req.voter.Id_image =buffer
         await req.voter.save()
         res.send()
@@ -92,6 +92,25 @@ router.get('/voter/get-candidates', authentication1, async (req, res)=>{
     }
     catch(e){
         console.log(e)
+    }
+})
+
+//create an api for getting seflie of voter
+router.get('/admin/candidate/:party/image', async (req, res)=>{
+    try{
+        const candidate = await Candidate.find({Political_party:req.params.party})
+        if(!candidate){
+            throw new Error()
+        }
+        if(!voter.Selfie_image){
+            return res.send("no image")
+        }
+        const image_data = Buffer.from(candidate.Candidate_image, 'base64')
+        res.set('Content-Type', 'image/png')
+        res.status(200).send(image_data)
+    }
+    catch(e){
+        res.status(404).send("There is no image available")
     }
 })
 

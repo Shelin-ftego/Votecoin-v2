@@ -12,6 +12,8 @@ import NavbarV from '../NavbarV';
 //import axios from "axios";
 //import { HorizontalBar } from "@reactchartjs/react-chart.js";
 
+
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -36,8 +38,11 @@ const useStyles = makeStyles({
   },
 });
   
-const classes = useStyles();
+//const classes = useStyles();
+
+
 class Results extends Component{
+
   state={results:undefined}
   createData(name, votes, totalvotes) {
     return { name, votes, totalvotes };
@@ -55,7 +60,7 @@ class Results extends Component{
           <NavbarV/>
         <h1>Results</h1>
         <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="customized table">
+        <Table  aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Party Name:</StyledTableCell>
@@ -76,7 +81,7 @@ class Results extends Component{
           </TableBody>
         </Table>
       </TableContainer>
-      <h1>YOU'RE WINNER IS: ANC</h1>
+      <h1>YOUR WINNER IS: ANC</h1>
       </div>
   )
 }

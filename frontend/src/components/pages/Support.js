@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-// import Footer from '../Footer';
+import Footer from '../Footer';
 import Navbar from '../Navbar';
 
 export default function Support() {
@@ -10,6 +10,7 @@ export default function Support() {
   return (<div>
   <Navbar/>
   <h1 className='support' style={supportstyle} > SUPPORT </h1>
+  <Footer/>
   {/* <Footer/> */}
   </div>);
 }

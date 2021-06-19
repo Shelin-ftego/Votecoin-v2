@@ -96,7 +96,7 @@ class Results extends Component{
 
     if (index>=0){
       // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
-      for (var i=0; i<(index-1); i++){
+      for (var i=0; i<=index; i++){
         const response = await contract.methods.getCandidate(i).call();
         // store response[1] into table // party name
         // store response[2] into table // votes received

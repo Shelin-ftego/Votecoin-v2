@@ -5,11 +5,17 @@ import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/
 import Footer from '../Footer';
 import axios from 'axios';
 import NavbarA from '../NavbarA';
+import GroupIcon from '@material-ui/icons/GroupOutlined';
+
 //import Dropzone from 'react-dropzone';
 
 // web3 imports
 import ElectionContract from "../../contracts/Election.json";
 import getWeb3 from "../../getWeb3";
+
+const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
+const avatarStyle={backgroundColor:'#1bbd7e'}
+const btnstyle={margin:'8px 0'}
 
 
 class AddCandidate extends Component{
@@ -103,15 +109,36 @@ class AddCandidate extends Component{
       <div> 
       <NavbarA/>
       <form onSubmit={this.handleSubmit}>
-        <h1>Candidates:</h1>
-        <div>
-          <h2>Political Party</h2>
-            <input type="text" onChange={(e) =>  this.setState({party:e.target.value})}/>
-        </div>
-        <Button type='submit' color='inherit' variant="contained" fullWidth >Add Candidate</Button>
+      <Grid> 
+        <h1 align='center'>Add New Candidates:</h1>
+
+        <Paper elevation={10} style={paperStyle}>
+    <Grid align='center'>
+        <Avatar style={avatarStyle}><GroupIcon/></Avatar>
+        <h2>Political Party</h2>
+    </Grid>
+     <Grid>
+     <TextField label='Party Name' placeholder='Please enter Party Name' onChange={(e) =>  this.setState({party:e.target.value})}/>
+             <br/>
+     </Grid>
+            <br/>
+    <Grid>            <label>Select Image to Upload: </label>
+               <input type='file' name='file'/>
+               <br/>
+               </Grid>
+         <br/>
+        <Button style={btnstyle} type='submit' color='inherit' variant="contained" fullWidth >Add Candidate</Button>
+        </Paper>
+        </Grid>
       </form>
     <Footer/>
     </div>)
   }
 }
 export default AddCandidate
+
+
+
+
+
+  

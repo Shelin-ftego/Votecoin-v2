@@ -1,10 +1,11 @@
 import React, {useState, useEffect, Component} from 'react';
 import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import '../../App.css';
-// import Footer from '../Footer';
+import Footer from '../Footer';
 import Navbar from '../Navbar';
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import CreateIcon from '@material-ui/icons/LockOutlined';
 import axios from 'axios'
 //import Dropzone from 'react-dropzone';
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,65 +58,68 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
     };
     
   
-  
+    paperStyle={padding :50,height:'115vh',width:400, margin:"20px auto"};
+    avatarStyle={backgroundColor:'#1bbd7e'};
+    btnstyle={margin:'8px 0', align:'middle'};
 
   render(){
   return(
     <div> 
     <Navbar/>
     <form onSubmit={this.handleSubmit}>
+    <Paper elevation={10} style={this.paperStyle}>
+    <Grid align='center'>
+    <Avatar style={this.avatarStyle}><CreateIcon/></Avatar>
+         <h2>Voter Registration</h2>
+     </Grid>
+     <h4> Please fill in the following information:</h4> 
         <div>
-          <h3>ID Number</h3>
-            <input type="text" onChange={(e) => this.setState({ID:e.target.value})}/>
+            <TextField label='ID' placeholder='Please enter identification number' onChange={(e) => this.setState({ID:e.target.value})}/>
         </div>
         <div>
-          <h3>Name</h3>
-            <input type="text" onChange={(e) => this.setState({name:e.target.value})}/>
+            <TextField label='Name' placeholder='Please enter First Name' onChange={(e) => this.setState({name:e.target.value})}/>
         </div>
         <div>
-          <h3>Surname</h3>
-            <input type="text" onChange={(e) => this.setState({surname:e.target.value})}/>
+            <TextField label='Surname' placeholder='Please enter Surname' onChange={(e) => this.setState({surname:e.target.value})}/>
         </div>
         <div>
-          <h3>Age</h3>
-            <input type="text" onChange={(e) => this.setState({age:e.target.value})}/>
+            <TextField label='Age' placeholder='Please enter Age' onChange={(e) => this.setState({age:e.target.value})}/>
         </div>
         <div>
-          <h3>Date of Birth(YYYY/MM/DD)</h3>
-            <input type="text" onChange={(e) => this.setState({dob:e.target.value})}/>
+            <TextField label='Date of Birth' placeholder='Enter DOB(YYYY/MM/DD)' onChange={(e) => this.setState({dob:e.target.value})}/>
         </div>
+        <br/>
         <div>
-          <h2>Address</h2>
+          <h4>Address:</h4>
             <div>
-              <h3>Province</h3>
-                <input type="text" onChange={(e) => this.setState({province:e.target.value})}/>
+                <TextField label='Province' placeholder='Please enter Province' onChange={(e) => this.setState({province:e.target.value})}/>
             </div>
             <div>
-              <h3>Municipality</h3>
-                <input type="text" onChange={(e) => this.setState({municipality:e.target.value})}/>
+                <TextField label='Municipality' placeholder='Please enter Municipality' onChange={(e) => this.setState({municipality:e.target.value})}/>
             </div>
             <div>
-              <h3>Ward</h3>
-                <input type="text" onChange={(e) => this.setState({ward:e.target.value})}/>
+                <TextField label='Ward' placeholder='Please enter Ward' onChange={(e) => this.setState({ward:e.target.value})}/>
             </div>
             <div>
-              <h3>Distinct</h3>
-                <input type="text" onChange={(e) => this.setState({district:e.target.value})}/>
+                <TextField label='Distinct' placeholder='Distinct' onChange={(e) => this.setState({district:e.target.value})}/>
             </div>
         </div>
+        <h4>Password:</h4>
         <div>
-            <h3>Password</h3>
-              <input type="password" onChange={(e) => this.setState({password:e.target.value})}/>
+              <TextField label='Password' placeholder='Please enter password' type='password' onChange={(e) => this.setState({password:e.target.value})}/>
         </div>
         <div>
-            <h3>Confirmed Password</h3>
-              <input type="password" onChange={(e) => this.setState({confirmi:e.target.value})}/>    
+              <TextField label='Confirm Password' placeholder='Please enter Confirm password' type='password' onChange={(e) => this.setState({confirmi:e.target.value})}/>    
         </div>
-          <Button type='submit' color='inherit' variant="contained" fullWidth >Register</Button>
+          <Button type='submit' color='inherit' variant="contained" style={this.btnstyle}>Register</Button>
+       </Paper>
       </form>
-    {/* <Footer/> */}
+    <Footer/>
     </div>);
   }
 }
 
 export default Register
+
+
+

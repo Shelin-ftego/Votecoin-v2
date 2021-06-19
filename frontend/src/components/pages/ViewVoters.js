@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
 import React, {useState, useEffect} from 'react'
 import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import NavbarA from '../NavbarA'
@@ -34,17 +34,25 @@ function Blockchain() {
         console.log(response)
         }, [])
 
+        const paperStyle={padding :20,height:'120vh',width:1450, margin:"20px auto"};
+        const avatarStyle={backgroundColor:'#1bbd7e'};
+        const btnstyle={margin:'8px 0'};
+
     return (
         <div>
             <main>
             <NavbarA/>
-            <h1>VOTERS</h1>
            <Grid>
+           <Paper elevation={10} style={paperStyle}>
+          <Grid align='center'>
+          <h1>REGISTER VOTERS: </h1>
+          </Grid>
             {
                 users.map((user) => <Voterroll_view ID={user.National_id} Name={user.Name} Surname={user.Surname}  
                                     Province={user.Address.Province} Municipality={user.Address.Municipality} Ward={user.Address.Ward} District={user.Address.District}
                                     Reg = {user.Registered} Voted = {user.Voted}/>)
             }
+            </Paper>
            </Grid>
            </main>
 

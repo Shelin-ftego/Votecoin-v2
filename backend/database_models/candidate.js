@@ -6,6 +6,9 @@ const candidate_schema = new mongoose.Schema({
         required: true,
         unique: true
         }
+        ,Candidate_image:{
+            type: Buffer
+        }
     }
 )
 

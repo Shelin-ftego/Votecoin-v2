@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Voter = require('../database_models/voter')
+const Candidate = require('../database_models/candidate')
 const authentication1 = require('../middleware/voter_authentication1')
 const authentication2 = require('../middleware/voter_authentication2')
 const multer = require('multer')
@@ -102,8 +103,23 @@ router.post('/voter/logout', authentication1, async(req, res)=>{
 
 //IDEA: Have to different authentication functions: one for users that haven;t been verified yet, and one for those who have 
 //voting page
+
+//get candidates
+router.get('/voter/get-candidates', authentication1, async (req, res)=>{
+    try{
+    const candidates = await Candidate.find({})
+    if(!candidates){
+        return res.send("No candidates")
+    }
+    res.status(200).send(candidates)
+    console.log(candidates)
+    }
+    catch(e){
+        console.log(e)
+    }
+})
 //THIS STILL NEEDS TO BE TESTED
-router.post('/voter/vote', authentication2, async (req, res)=>{
+router.patch('/voter/vote', authentication2, async (req, res)=>{
     try{
         if(req.voter.Voted){
             throw new Error('You have already voted')

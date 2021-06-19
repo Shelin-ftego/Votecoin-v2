@@ -13,7 +13,7 @@ make a web3 setup funciton and add the candidate using submitCandidate or call i
 */
 
 class AddCandidate extends Component{
-  state = { party: undefined, name: undefined, surname:undefined, age:undefined};
+  state = { party: undefined};
 
    handleSubmit = event => {
     event.preventDefault()
@@ -23,10 +23,7 @@ class AddCandidate extends Component{
    submitCandidate = async()=>{
     try{
       const newCandidate = {
-          Political_party : this.state.party,
-          Name : this.state.name,
-          Surname : this.state.surname,
-          Age : this.state.age,
+          Political_party : this.state.party
       }
       const token = localStorage.getItem('token')
       const config1 ={
@@ -56,25 +53,11 @@ class AddCandidate extends Component{
       <form onSubmit={this.handleSubmit}>
         <h1>Candidate:</h1>
         <div>
-          <h3>Political Party</h3>
+          <h2>Political Party</h2>
             <input type="text" onChange={(e) =>  this.setState({party:e.target.value})}/>
-        </div>
-        <div>
-          <h3>Name</h3>
-            <input type="text" onChange={(e) =>  this.setState({name:e.target.value})}/>
-        </div>
-        <div>
-          <h3>Surname</h3>
-            <input type="text" onChange={(e) =>  this.setState({surname:e.target.value})}/>
-        </div>
-        <div>
-          <h3>Age</h3>
-            <input type="text" onChange={(e) =>  this.setState({age:e.target.value})}/>
         </div>
         <Button type='submit' color='inherit' variant="contained" fullWidth >Add Candidate</Button>
       </form>
-
-      
     <Footer/>
     </div>)
   }

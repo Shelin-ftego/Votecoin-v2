@@ -58,6 +58,7 @@ const Results = () => {
 
   return (
     <div>
+        <NavbarV/>
       <h1>Results</h1>
     </div>
   );

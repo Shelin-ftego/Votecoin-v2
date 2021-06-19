@@ -36,7 +36,7 @@ const Voterroll = function (props){
 
     const auth = async(idnumber)=>{
         try{
-            console.log("authenticated")
+            
             const token = localStorage.getItem('token')
             const config ={
               headers:{
@@ -45,11 +45,10 @@ const Voterroll = function (props){
               }
             }
             await axios.patch(`/admin/${idnumber}/voter-auth`,{}, config)
+            console.log("authenticated")
             //should refresh page
         }
-
         catch(e){
-
         }
     }
 

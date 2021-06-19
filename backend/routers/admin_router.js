@@ -84,9 +84,7 @@ router.get('/admin/election-admin/candidate', authentication, async (req, res)=>
     res.status(200).send(candidates)
     }
     catch(e){
-
     }
-
 })
 
 //remove candidate

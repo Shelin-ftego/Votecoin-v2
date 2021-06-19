@@ -73,8 +73,8 @@ function NavbarA() {
                          </Link> 
                      </li>
                      <li className='navA-item'>
-                         <Link to='/results' className='navA-links' onClick={closeMobileMenu}>
-                           Results   
+                         <Link to='/view-voters' className='navA-links' onClick={closeMobileMenu}>
+                           Voters Roll  
                          </Link> 
                      </li>
                      <li className='navA-item'>

@@ -57,6 +57,10 @@ const Vcard = () => {
      {
       cards.map((user) => <Candidate_view PartyName={user.PartyName} Name={user.Name}/>)
      }
+     <br/>
+     <Link to to='/voter'>
+     <button> BACK </button>
+     </Link>
       </div>
  );
 };

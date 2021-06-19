@@ -1,4 +1,4 @@
-import { Divider } from "@material-ui/core";
+mport { Divider } from "@material-ui/core";
 import React, { useEffect, useState, Component } from "react";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -104,17 +104,17 @@ class Results extends Component{
         // % votes = response[2]/totalVotes * 100 // % of votes received
       }
     }
-  };    
+  }; 
 
-  createData(name, votes, totalvotes) {
-    return { name, votes, totalvotes };
+  createData(position, name, votes, percentvotes) {
+    return {position, name, votes,percentvotes };
   }
   rows = [
-    this.createData('EFF', 700, 2720),
-    this.createData('DA', 500, 2720),
-    this.createData('IFP', 200, 2720),
-    this.createData('ANC', 900, 2720),
-    this.createData('MF', 420, 2720),
+    this.createData(1,'EFF', 900, 40.54),
+    this.createData(2,'DA', 500, 22.52),
+    this.createData(3,'IFP', 420, 18.92),
+    this.createData(4,'ANC', 300, 13.51),
+    this.createData(5,'MF', 100, 4.51),
   ];
   render(){
     return (
@@ -125,25 +125,27 @@ class Results extends Component{
         <Table  aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Party Name:</StyledTableCell>
-              <StyledTableCell align="right">Number of Votes</StyledTableCell>
-              <StyledTableCell align="right">%</StyledTableCell>
+            <StyledTableCell>Position:</StyledTableCell>
+              <StyledTableCell align="right">Party Name:</StyledTableCell>
+              <StyledTableCell align="right">Number of Votes:</StyledTableCell>
+              <StyledTableCell align="right">Percentage of Votes:</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {this.rows.map((row) => (
-              <StyledTableRow key={row.name}>
+              <StyledTableRow key={row.position}>
                 <StyledTableCell component="th" scope="row">
-                  {row.name}
+                  {row.position}
                 </StyledTableCell>
+                <StyledTableCell align="right">{row.name}</StyledTableCell>
                 <StyledTableCell align="right">{row.votes}</StyledTableCell>
-                <StyledTableCell align="right">{row.totalvotes}</StyledTableCell>
+                <StyledTableCell align="right">{row.percentvotes}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <h1>YOUR WINNER IS: {this.state.winner}</h1>
+      <h1>WINNER: {this.state.winner}</h1>
       </div>
   )
 }

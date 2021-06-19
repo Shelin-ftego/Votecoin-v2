@@ -58,9 +58,9 @@ class ElectionS extends Component{
 
         // update state with status of election
         if (response == true){
-            this.setState({ status: "Open" });
+            this.setState({ status: "OPEN" });
         }else{
-            this.setState({ status: "Closed" });
+            this.setState({ status: "CLOSED" });
         }    
       };
 
@@ -111,9 +111,7 @@ class ElectionS extends Component{
         <Typography > 
              Providing the admin with the ability to stop and start the voting period
                     </Typography>
-
-         <br/>
-         <h1>The current voting status: {this.state.status}</h1>           
+         <br/>        
             </Paper>
             </Grid>
         </div>

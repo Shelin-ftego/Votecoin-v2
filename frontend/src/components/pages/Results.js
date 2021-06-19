@@ -1,4 +1,4 @@
-mport { Divider } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 import React, { useEffect, useState, Component } from "react";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -85,9 +85,6 @@ class Results extends Component{
   // get results from blockchain
   fetchResults = async () => {
     const { accounts, contract } = this.state;
-    const winnerObj = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
-    this.setState({ winner: winnerObj[1] });
-    // console.log(winner);
 
     const totalVotes = await contract.methods.totalVotes().call(); // get total votes
 
@@ -96,12 +93,18 @@ class Results extends Component{
     console.log(index);
 
     if (index>=0){
-      // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
+      const winnerObj = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
+      this.setState({ winner: winnerObj[1] });
+      console.log(this.state.winner);
+      
       for (var i=0; i<=index; i++){
-        const response = await contract.methods.getCandidate(i).call();
+        const response = await contract.methods.getCandidate(i).call(); // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
         // store response[1] into table // party name
         // store response[2] into table // votes received
-        // % votes = response[2]/totalVotes * 100 // % of votes received
+        const votesPercent = response[2]/totalVotes * 100 // % of votes received
+        // rows[i] = this.createData(i, response[1], response[2], votesPercent);
+
+
       }
     }
   }; 
@@ -109,6 +112,8 @@ class Results extends Component{
   createData(position, name, votes, percentvotes) {
     return {position, name, votes,percentvotes };
   }
+
+
   rows = [
     this.createData(1,'EFF', 900, 40.54),
     this.createData(2,'DA', 500, 22.52),
@@ -116,6 +121,7 @@ class Results extends Component{
     this.createData(4,'ANC', 300, 13.51),
     this.createData(5,'MF', 100, 4.51),
   ];
+
   render(){
     return (
       <div>

@@ -2,9 +2,7 @@
 const webtoken = require('jsonwebtoken')
 const Voter = require('../database_models/voter')
 const voter_auth1 = async (req, res, next)=>{
-    
     try{
-        console.log(10)
         //get the web token
         const token = req.header('Authorization').replace('Bearer ', '')
         const decoded_voter = webtoken.verify(token,  process.env.token_string)    //the 'design3' string is a random string used for token validation
@@ -17,7 +15,6 @@ const voter_auth1 = async (req, res, next)=>{
         req.token = token
         req.voter = voter
         next()
-
     }
     catch(e){
         res.status(401).send({error: 'Authentication is needed.'})

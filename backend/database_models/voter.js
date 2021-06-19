@@ -71,7 +71,6 @@ const voter_schema = new mongoose.Schema({
                 throw new Error("Date entered is invalid. Check formatting: YYYY/MM/DD")
             }
         }
-
     }
     ,Address:{
         type: address_schema,
@@ -167,5 +166,4 @@ voter_schema.methods.toJSON = function(){
 }
 
 const Voter = mongoose.model('Voter', voter_schema)
-
 module.exports = Voter

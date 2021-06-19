@@ -1,9 +1,16 @@
 import React, {useState, useEffect, Component} from 'react';
 import NavbarA from '../NavbarA';
+import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core'
+import ThumbUpIcon from '@material-ui/icons/ThumbUpOutlined';
 
 // web3 imports
 import ElectionContract from "../../contracts/Election.json";
 import getWeb3 from "../../getWeb3";
+
+
+const paperStyle={padding :20,height:'70vh',width:700, margin:"20px auto"};
+const avatarStyle={backgroundColor:'#1bbd7e'};
+const btnstyle={margin:'15px 0',font: '20px',padding: '10px 60px',border: '20px'};
 
 class ElectionS extends Component{
 
@@ -82,13 +89,33 @@ class ElectionS extends Component{
         };
 
 
+
     render(){
     return (
         <div>
             <NavbarA/>
-        <h1> VOTING STATUS: {this.state.status}</h1>
-        <button onClick={this.handleStartSubmit}>Start Voting Period</button>
-        <button onClick={this.handleStopSubmit}>End Voting Period</button>
+            <Grid>
+            <Paper elevation={10} style={paperStyle}>
+            <Grid align='center'>
+                        <Avatar style={avatarStyle}><ThumbUpIcon/></Avatar>
+                        <h1>VOTING STATUS: {this.state.status}</h1>
+            </Grid>
+        <Grid align='center'>
+        <Button align='left' type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.handleStartSubmit}>Start Voting Period</Button>
+        </Grid>
+        <br/>
+        <Grid align='center'>
+        <Button alight='right' type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.handleStopSubmit}>End Voting Period</Button>
+        </Grid>
+        <br/>
+        <Typography > 
+             Providing the admin with the ability to stop and start the voting period
+                    </Typography>
+
+         <br/>
+         <h1>The current voting status: {this.state.status}</h1>           
+            </Paper>
+            </Grid>
         </div>
     )
     }
@@ -96,3 +123,5 @@ class ElectionS extends Component{
 }
 
 export default ElectionS
+
+

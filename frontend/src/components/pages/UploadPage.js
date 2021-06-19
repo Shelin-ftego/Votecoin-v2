@@ -4,15 +4,14 @@ import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/
 import NavbarV from '../NavbarV';
 import axios from 'axios'
 
-{/*function   imageHandler(e) {
+ {/*function   imageHandler(e) {
   const reader = new FileReader();
   reader.onload = () =>{
     if(reader.readyState === 2){
-      this.setState({profileImg: reader.result})
+      profileImg= reader.result
     }
   }
-  reader.readAsDataURL(e.target.files[0])
-};*/}
+}*/}
 
 
   const profileImg='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
@@ -42,8 +41,7 @@ const [image, setImage] = useState<File>(input);
   };
   const [idimage,setIDImage] = useState(null)
   const [selfie,setSelfie] = useState(null)
-  const [profileImg,setProf] = useState(null)
-
+  
   const handleSubmit = event => {
     event.preventDefault()
     submitImages()
@@ -60,6 +58,7 @@ const [image, setImage] = useState<File>(input);
       }
       //upload the image
       //still have ot figure out how to get the name property
+      const profileImg = new FormData()
       const id_img = new FormData()
       id_img.append('id', {idimage}.idimage, {idimage}.idimage.name)
       const selfie_img = new FormData()
@@ -95,7 +94,7 @@ return (
         <br/>
         <div>
           <label>Upload ID(PNG): </label>
-          <input type='file' id='id' onChange={(e)=>setIDImage(e.target.files[0])}/>
+          <input type='file' id='id' onChange={(e)=>setIDImage(e.target.files[0])} />{/*onChange={(e)=>imageHandler(e.target.files[0]) */}
         </div>
         <br/>
         <div>
@@ -108,7 +107,7 @@ return (
         </div>
         </Paper>
         
-    <img src={profileImg} alt="" id="img" className="img" align='center' />
+   {/* <img src={profileImg} alt="" id="profileImg" className="img" align='center' />*/} 
         </Grid>
     </form>
     </div>

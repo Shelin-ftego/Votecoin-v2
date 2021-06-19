@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import Footer from '../Footer';
+// import Footer from '../Footer';
 import HeroSection from '../HeroSection';
 import Navbar from '../Navbar';
 
@@ -10,7 +10,7 @@ function Home() {
     <>
       <Navbar />
       <HeroSection />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

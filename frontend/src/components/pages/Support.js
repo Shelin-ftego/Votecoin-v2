@@ -1,6 +1,6 @@
 //import React from 'react';
 import '../../App.css';
-import Footer from '../Footer';
+// import Footer from '../Footer';
 import Navbar from '../Navbar';
 import React, { Component } from "react";
 
@@ -149,6 +149,7 @@ export default function Support() {
         </div>
       </section>
   <Footer/>
+  {/* <Footer/> */}
   </div>);
 }
 

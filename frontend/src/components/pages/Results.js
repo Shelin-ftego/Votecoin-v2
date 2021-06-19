@@ -47,7 +47,7 @@ const useStyles = makeStyles({
 class Results extends Component{
 
   // states + web3 states
-  state = { results: undefined, web3: null, accounts: null, contract: null, status: null };
+  state = { winner: undefined, results: undefined, web3: null, accounts: null, contract: null, status: null };
 
   // web3 initialization
   componentDidMount = async () => {
@@ -85,7 +85,8 @@ class Results extends Component{
   // get results from blockchain
   fetchResults = async () => {
     const { accounts, contract } = this.state;
-    // const winner = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
+    const winnerObj = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
+    this.setState({ winner: winnerObj[1] });
     // console.log(winner);
 
     const totalVotes = await contract.methods.totalVotes().call(); // get total votes
@@ -125,8 +126,8 @@ class Results extends Component{
           <TableHead>
             <TableRow>
               <StyledTableCell>Party Name:</StyledTableCell>
-              <StyledTableCell align="right">Number of Votes:</StyledTableCell>
-              <StyledTableCell align="right">Total Votes:</StyledTableCell>
+              <StyledTableCell align="right">Number of Votes</StyledTableCell>
+              <StyledTableCell align="right">%</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -142,7 +143,7 @@ class Results extends Component{
           </TableBody>
         </Table>
       </TableContainer>
-      <h1>YOUR WINNER IS: ANC</h1>
+      <h1>YOUR WINNER IS: {this.state.winner}</h1>
       </div>
   )
 }

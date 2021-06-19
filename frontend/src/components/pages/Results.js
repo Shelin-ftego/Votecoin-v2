@@ -47,7 +47,7 @@ const useStyles = makeStyles({
 class Results extends Component{
 
   // states + web3 states
-  state = { winner: undefined, results: undefined, web3: null, accounts: null, contract: null, status: null };
+  state = { winner: undefined, status: undefined, results: undefined, web3: null, accounts: null, contract: null, status: null };
 
   // web3 initialization
   componentDidMount = async () => {
@@ -85,6 +85,16 @@ class Results extends Component{
   // get results from blockchain
   fetchResults = async () => {
     const { accounts, contract } = this.state;
+    
+    // check the election status on smart contract
+    const response0 = await contract.methods.isVotingOpen().call();
+
+    // update state with status of election
+    if (response0 === true){
+      this.setState({ status: true });
+    }else{
+      this.setState({ status: false });
+    } 
 
     const totalVotes = await contract.methods.totalVotes().call(); // get total votes
 
@@ -92,19 +102,19 @@ class Results extends Component{
     var index = (await contract.methods.getNumofCandidates().call()) - 1;
     console.log(index);
 
-    if (index>=0){
-      const winnerObj = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
-      this.setState({ winner: winnerObj[1] });
-      console.log(this.state.winner);
-      
-      for (var i=0; i<=index; i++){
-        const response = await contract.methods.getCandidate(i).call(); // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
-        // store response[1] into table // party name
-        // store response[2] into table // votes received
-        const votesPercent = response[2]/totalVotes * 100 // % of votes received
-        // rows[i] = this.createData(i, response[1], response[2], votesPercent);
-
-
+    if (this.state.status === false){
+      if (index>=0){
+        const winnerObj = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
+        this.setState({ winner: winnerObj[1] });
+        console.log(this.state.winner);
+        
+        for (var i=0; i<=index; i++){
+          const response = await contract.methods.getCandidate(i).call(); // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
+          // store response[1] into table // party name
+          // store response[2] into table // votes received
+          const votesPercent = response[2]/totalVotes * 100 // % of votes received
+          // rows[i] = this.createData(i, response[1], response[2], votesPercent);
+    }
       }
     }
   }; 
@@ -123,6 +133,7 @@ class Results extends Component{
   ];
 
   render(){
+    // return election results not available when status == true
     return (
       <div>
           <NavbarV/>

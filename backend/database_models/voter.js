@@ -54,24 +54,6 @@ const voter_schema = new mongoose.Schema({
             }
         }
     }
-    ,Age:{
-        type: Number,
-        required: true,
-        validate(value){
-            if(value<18){
-                throw new Error('This individual is underage.');
-            }
-        }
-    }
-    ,Date_of_Birth:{
-        type:String,
-        required: true,
-        validate(value){
-            if(!validator.isDate(value)){
-                throw new Error("Date entered is invalid. Check formatting: YYYY/MM/DD")
-            }
-        }
-    }
     ,Address:{
         type: address_schema,
         required:true

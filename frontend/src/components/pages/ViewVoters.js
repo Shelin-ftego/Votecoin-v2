@@ -41,7 +41,7 @@ function Blockchain() {
             <h1>VOTERS</h1>
            <Grid>
             {
-                users.map((user) => <Voterroll_view ID={user.National_id} Name={user.Name} Surname={user.Surname} Age = {user.Age} 
+                users.map((user) => <Voterroll_view ID={user.National_id} Name={user.Name} Surname={user.Surname}  
                                     Province={user.Address.Province} Municipality={user.Address.Municipality} Ward={user.Address.Ward} District={user.Address.District}
                                     Reg = {user.Registered} Voted = {user.Voted}/>)
             }

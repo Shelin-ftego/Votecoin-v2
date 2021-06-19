@@ -13,7 +13,7 @@ import axios from 'axios'
 NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handlesumbit'(create a function and call it there)
 */
   class Register extends Component{
-  state = { ID: 0, name: 0, surname:0, age:0, dob:0, province:undefined, municipality:undefined
+  state = { ID: 0, name: 0, surname:0, province:undefined, municipality:undefined
           , ward:undefined, district:undefined, password:undefined, confirmi:undefined };
           submitVoter = async()=>{
             try{
@@ -28,8 +28,6 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
                   National_id : this.state.ID,
                   Name : this.state.name,
                   Surname : this.state.surname,
-                  Age : this.state.age,
-                  Date_of_Birth : this.state.dob,
                   Address : {
                       Province : this.state.province,
                       Municipality : this.state.municipality,
@@ -81,12 +79,6 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
         </div>
         <div>
             <TextField label='Surname' placeholder='Please enter Surname' onChange={(e) => this.setState({surname:e.target.value})}/>
-        </div>
-        <div>
-            <TextField label='Age' placeholder='Please enter Age' onChange={(e) => this.setState({age:e.target.value})}/>
-        </div>
-        <div>
-            <TextField label='Date of Birth' placeholder='Enter DOB(YYYY/MM/DD)' onChange={(e) => this.setState({dob:e.target.value})}/>
         </div>
         <br/>
         <div>

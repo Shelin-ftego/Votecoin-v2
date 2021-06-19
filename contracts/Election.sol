@@ -9,8 +9,6 @@ contract Election{
     
     bool public isVotingOpen; // status of election
 
-    uint public numofVoters; // number of voters
-
     uint public totalVotes; // total votes cast during election
 
     event voteEvent(address indexed _voter, uint _candidateIndex); // vote event log
@@ -23,7 +21,6 @@ contract Election{
     
     constructor() public{ // constructor
         contractOwner = msg.sender; // sets caller to owner of contract
-        numofVoters = 0;
         totalVotes = 0;
     }    
 
@@ -41,7 +38,6 @@ contract Election{
     }
     
     struct Voter{
-        bool authorized; // checks if voter is authorized to vote
         bool voted; // checks if voter has voted
         uint vote; // candidate voter has voted
     }
@@ -51,13 +47,6 @@ contract Election{
     function addCandidate(string memory _name) adminOnly public{
         require(!isVotingOpen, "Cannot add candidates after voting has begun!"); // requires voting to be closed
         candidates.push(Candidate(candidates.length, _name, 0)); // adds the candidate onto the candidate array, by default 0 votes
-    }
-
-    function authorizeVoter(address _person) adminOnly public{ // requires special permission
-        require(!isVotingOpen, "Cannot register after voting has begun!"); // requires voting to be closed
-        require(!voters[_person].authorized, "Already authorized to vote!"); // reject if voter already authorized
-        voters[_person].authorized = true; // authorization granted
-        numofVoters++;
     }
 
     function endElection() adminOnly public{ // ends the contract and election
@@ -70,7 +59,6 @@ contract Election{
 
     function vote(uint _candidateIndex) public{ // function for the user to vote
         require(isVotingOpen, "Cannot vote before voting period has begun!"); // requires voting to be open
-        require(voters[msg.sender].authorized, "Unauthorized to vote!"); // voter *MUST* be authorized to vote
         require(!voters[msg.sender].voted, "Already voted!"); // voter *MUST NOT* have voted
         require(_candidateIndex >= 0, "Invalid candidate!"); // requires valid candidateID
         
@@ -83,6 +71,7 @@ contract Election{
     }
 
 /********************************************************************READ-ONLY FUNCTIONS*********************************************************************/
+
     function getCandidate(uint _candidateIndex) public view returns (uint id, string memory name, uint votesReceived){
         require(_candidateIndex >= 0, "Invalid candidate!"); // requires valid candidateID
         return (candidates[_candidateIndex].id, candidates[_candidateIndex].name, candidates[_candidateIndex].votesReceived);

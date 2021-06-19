@@ -52,7 +52,7 @@ function NavbarV() {
         <>
          <nav className="navbarV">
              <div className="navbarV-container">
-                 <Link to="/admin" className="navbarV-logo" onClick={closeMobileMenu}> 
+                 <Link to="/voter" className="navbarV-logo" onClick={closeMobileMenu}> 
                    VOTECOIN <i className='class="fas fa-person-booth"'/>
                  </Link>
                   <div className='menu-icon' onClick={handleClick}>

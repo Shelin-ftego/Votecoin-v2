@@ -134,6 +134,10 @@ class Results extends Component{
 
   render(){
     // return election results not available when status == true
+    if(this.state.status === true){
+      return(<div>Election is currently open, results unavailable</div>)
+    }
+
     return (
       <div>
           <NavbarV/>

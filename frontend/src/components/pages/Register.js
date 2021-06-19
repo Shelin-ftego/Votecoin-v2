@@ -111,7 +111,9 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
         <div>
               <TextField label='Confirm Password' placeholder='Please enter Confirm password' type='password' onChange={(e) => this.setState({confirmi:e.target.value})}/>    
         </div>
-          <Button type='submit' color='inherit' variant="contained" style={this.btnstyle}>Register</Button>
+        <Grid align='center'>
+          <Button type='submit' color='inherit' variant="contained" style={this.btnstyle} align='center'>Register</Button>
+        </Grid>
        </Paper>
       </form>
     <Footer/>

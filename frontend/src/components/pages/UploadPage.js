@@ -74,28 +74,43 @@ const [image, setImage] = useState<File>(input);
       console.log(e)
     }
   }
-
+  const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
+  const avatarStyle={backgroundColor:'#1bbd7e'}
+  const btnstyle={margin:'8px 0'}
 
 return (
     <div>
     <NavbarV/>
       <form onSubmit={handleSubmit}>
-        <h1>Upload page</h1>
+        
+        <Grid>
+        <Paper elevation={20} style={paperStyle}>
+        <Grid align='center'>
+        <h1 align='center'>Upload Images</h1>
+        </Grid>
         {/* <img src={profileImg} alt="" id="img" className="img" /> */}
+        <br/>
         <div>
           <label>Upload ID(PNG): </label>
           <input type='file' id='id' onChange={(e)=>setIDImage(e.target.files[0])} />
         </div>
+        <br/>
         <div>
           <label>Upload Selfie(PNG): </label>
           <input type='file' id='selfie' onChange={(e)=>setSelfie(e.target.files[0]) }/>
         </div> 
+        <br/>
         <div>
-          <Button type='submit' color='inherit' variant="contained" >Upload Images</Button>
+          <Button type='submit' color='inherit' variant="contained" style={btnstyle}>Upload Images</Button>
         </div>
+        </Paper>
+        </Grid>
     </form>
     </div>
 )
 }
 
 export default UploadPage
+
+
+

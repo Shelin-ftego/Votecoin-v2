@@ -12,6 +12,9 @@ import NavbarV from '../NavbarV';
 //import axios from "axios";
 //import { HorizontalBar } from "@reactchartjs/react-chart.js";
 
+// web3 imports
+import ElectionContract from "../../contracts/Election.json";
+import getWeb3 from "../../getWeb3";
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -43,7 +46,42 @@ const useStyles = makeStyles({
 
 class Results extends Component{
 
-  state={results:undefined}
+    // states + web3 states
+    state = { results: undefined, web3: null, accounts: null, contract: null, status: null };
+
+    // web3 initialization
+    componentDidMount = async () => {
+      try {
+        // Get network provider and web3 instance.
+        const web3 = await getWeb3();
+  
+        // Use web3 to get the user's accounts.
+        const accounts = await web3.eth.getAccounts();
+  
+        // Get the contract instance.
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = ElectionContract.networks[networkId];
+        const instance = new web3.eth.Contract(
+          ElectionContract.abi,
+          deployedNetwork && deployedNetwork.address,
+        );
+  
+        console.log(networkId);
+        console.log(deployedNetwork.address);
+        console.log(ElectionContract.abi);
+        
+        // Set web3, accounts, and contract to the state, and then proceed with an
+        // example of interacting with the contract's methods.
+        this.setState({ web3, accounts, contract: instance }, this.fetchStatus);
+      } catch (error) {
+        // Catch any errors for any of the above operations.
+        alert(
+          `Failed to load web3, accounts, or contract. Check console for details.`,
+        );
+        console.error(error);
+      }
+    };  
+
   createData(name, votes, totalvotes) {
     return { name, votes, totalvotes };
   }

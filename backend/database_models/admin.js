@@ -4,7 +4,6 @@ const validator = require('validator')
 //encryption and token modules
 const bcrypt = require('bcryptjs')
 const webtoken = require('jsonwebtoken')
-//const { ifError } = require('assert')
 
 const admin_schema = new mongoose.Schema({
     Admin_id:{
@@ -51,7 +50,6 @@ admin_schema.statics.findPersonal = async(admin_id, password)=>{
     if(!admin){
         throw new Error("These credentials are invalid")
     }
-    
     const validPassword =  await bcrypt.compare(password, admin.Password)
     if(!validPassword){
         throw new Error("Invalid Password")
@@ -91,5 +89,4 @@ admin_schema.methods.toJSON = function(){
 }
 
 const Admin = mongoose.model('Admin', admin_schema)
-
 module.exports = Admin

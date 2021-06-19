@@ -6,10 +6,8 @@ const candidate_schema = new mongoose.Schema({
         required: true,
         unique: true
         }
-
     }
 )
 
 const Candidate = mongoose.model('Candidate', candidate_schema)
-
 module.exports = Candidate

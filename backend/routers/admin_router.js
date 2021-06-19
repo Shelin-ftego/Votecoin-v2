@@ -9,7 +9,7 @@ const multer = require('multer')
 const sharp = require('sharp')
 router.use(express.json())
 
-//multer function
+//multer function for images
 const upload_image = multer({
     fileFilter(req, file, cb){
         
@@ -22,52 +22,13 @@ const upload_image = multer({
     }
 })
 
-
-//temporary endpoint for adding admin
-router.post('/admin/register', async(req, res)=>{
-    const new_admin = new Admin(req.body)
-    try{
-        await new_admin.save()
-        const token = await new_admin.generate_token()
-        res.status(201).send({new_admin, token})
-    }
-    catch(e){
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-//The main admin page: This route must be fetched when the admin client gets verified
-router.get('/admin', authentication, async (req, res)=>{
-    //send a resposne for now
-    res.send({token})
-    //render the admin page
-    //res.render() ...
-})
-
-//register a particular person-> This is for people who cannot vote remotely
-//to be removed
-router.post('/admin/voter-registration',authentication, async (req, res)=>{
-    //get request body for new voter info
-    const voter = new Voter(req.body) //dont forget to set registered to true in the body
-    try{
-        await voter.save()
-        //const token = await voter.generate_Token()
-        res.status(201).send({voter, token})
-    }
-    catch(e){
-        res.status(400).send()
-    }
-})
-
-
 //add candidate
 router.post('/admin/election-admin/candidate', authentication, async (req, res)=>{
     //get request body for new voter info
     const candidate = new Candidate(req.body)
     try{
         await candidate.save()
-        res.status(201).send({candidate})
+        res.status(201).send()
     }
     catch(e){
         res.status(400).send()
@@ -87,7 +48,7 @@ router.get('/admin/election-admin/candidate', authentication, async (req, res)=>
     }
 })
 
-//remove candidate
+//remove candidate(not used)
 router.delete('/admin/election-admin/candidate/:party', authentication, async(req, res)=>{
     try{
     const candidate = await Candidate.findOneAndDelete({Political_party: req.params.party})
@@ -104,9 +65,6 @@ router.delete('/admin/election-admin/candidate/:party', authentication, async(re
 //logout
 router.post('/admin/logout', authentication, async(req, res)=>{
     try{
-        // req.admin.Tokens = req.admin.Tokens.filter((token)=>{
-        //     return token.token !==req.token
-        // })
         //clears all web tokens
         req.admin.Tokens = []
         await req.admin.save()
@@ -119,24 +77,32 @@ router.post('/admin/logout', authentication, async(req, res)=>{
 
 //get all voters
 router.get('/admin/voters', authentication, async(req, res)=>{
-    const voters = await Voter.find({})
-    if(!voters){
-        return res.send("There are no voters")
+    try{
+        const voters = await Voter.find({})
+        if(!voters){
+            return res.send("There are no voters")
+        }
+        res.status(200).send(voters)
     }
-    res.status(200).send(voters)
+    catch(e){
+        res.status(500).send()
+    }
 })
 
 //get all unverified voters
 router.get('/admin/voters-unverified', authentication, async(req, res)=>{
-    const voters = await Voter.find({Registered:false})
-    if(!voters){
-        return res.send("All registered voters have been verified")
+    try{
+        const voters = await Voter.find({Registered:false})
+        if(!voters){
+            return res.send("All registered voters have been verified")
+        }
+        res.status(200).send(voters)
     }
-    res.status(200).send(voters)
-
+    catch(e){   
+        res.status(500).send() 
+    }
 })
 
-//create an api for authenticating voter
 //this is used when an admin verifies voters docs
 router.patch('/admin/:id/voter-auth', authentication, async(req, res)=>{
     try{
@@ -146,7 +112,7 @@ router.patch('/admin/:id/voter-auth', authentication, async(req, res)=>{
         }
         voter.Registered = true
         await voter.save()
-        res.send("success")
+        res.staus(200).send("voter has been authenticated")
     }
     catch(e){
         res.status(400).send(e)
@@ -159,20 +125,18 @@ router.get('/admin/voters/:id/id', async (req, res)=>{
     try{
         const voter = await Voter.findforAdmin(req.params.id)
         if(!voter){
-            throw new Error()
+            throw new Error("Voter does not exist")
         }
-
         if(!voter.Id_image){
             return res.send()
         }
         const image_data = Buffer.from(voter.Id_image, 'base64')
-        console.log(image_data)
         res.set('Content-Type', 'image/png')
         res.status(200).send(image_data)
     }
     catch(e){
         console.log(e)
-        res.status(404).send()
+        res.status(404).send("There is no image available")
     }
 })
 
@@ -184,10 +148,9 @@ router.get('/admin/voters/:id/selfie', async (req, res)=>{
             throw new Error()
         }
         if(!voter.Selfie_image){
-            return res.send("1")
+            return res.send()
         }
         const image_data = Buffer.from(voter.Selfie_image, 'base64')
-        console.log(image_data)
         res.set('Content-Type', 'image/png')
         res.status(200).send(image_data)
     }

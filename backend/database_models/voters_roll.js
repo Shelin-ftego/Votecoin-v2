@@ -1,3 +1,4 @@
+//This is not used in the final version of the project due to time constraints
 const mongoose = require('mongoose')
 const validator = require('validator')
 const voters_roll_schema = new mongoose.Schema({
@@ -48,5 +49,4 @@ const voters_roll_schema = new mongoose.Schema({
 })
 
 const Voters_Roll = mongoose.model('Voters_Roll', voters_roll_schema)
-
 module.exports = Voters_Roll

@@ -18,7 +18,6 @@ const voter_auth2 = async (req, res, next)=>{
         req.token = token
         req.voter = voter
         next()
-
     }
     catch(e){
         res.status(401).send({error: 'Authentication is needed.'})

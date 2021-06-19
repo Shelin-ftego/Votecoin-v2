@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Component} from 'react';
 import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import '../../App.css';
-import Footer from '../Footer';
+// import Footer from '../Footer';
 import Navbar from '../Navbar';
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -113,7 +113,7 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
         </div>
           <Button type='submit' color='inherit' variant="contained" fullWidth >Register</Button>
       </form>
-    <Footer/>
+    {/* <Footer/> */}
     </div>);
   }
 }

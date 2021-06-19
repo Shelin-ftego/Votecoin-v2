@@ -10,7 +10,7 @@ function Voter() {
             <h1>Welcome Voter</h1>
             <h1>Here you are able to: </h1>
             <h1>-Vote</h1>
-            <h1>-Vefiy if your vote has been cast</h1>
+            <h1>-Verify if your vote has been cast</h1>
             <h1>-View Results when available</h1>
             <h1>-Upload required documents</h1>
             <br/>

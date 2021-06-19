@@ -15,6 +15,8 @@ import axios from 'axios'
 };*/}
 
 
+  const profileImg='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+
 function UploadPage() {
  {/*  const state={
     profileImg:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
@@ -40,6 +42,7 @@ const [image, setImage] = useState<File>(input);
   };
   const [idimage,setIDImage] = useState(null)
   const [selfie,setSelfie] = useState(null)
+  const [profileImg,setProf] = useState(null)
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -74,7 +77,7 @@ const [image, setImage] = useState<File>(input);
       console.log(e)
     }
   }
-  const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
+  const paperStyle={padding :20,height:'40vh',width:600, margin:"20px auto"}
   const avatarStyle={backgroundColor:'#1bbd7e'}
   const btnstyle={margin:'8px 0'}
 
@@ -83,7 +86,7 @@ return (
     <NavbarV/>
       <form onSubmit={handleSubmit}>
         
-        <Grid>
+        <Grid align='center'>
         <Paper elevation={20} style={paperStyle}>
         <Grid align='center'>
         <h1 align='center'>Upload Images</h1>
@@ -92,7 +95,7 @@ return (
         <br/>
         <div>
           <label>Upload ID(PNG): </label>
-          <input type='file' id='id' onChange={(e)=>setIDImage(e.target.files[0])} />
+          <input type='file' id='id' onChange={(e)=>setIDImage(e.target.files[0])}/>
         </div>
         <br/>
         <div>
@@ -104,6 +107,8 @@ return (
           <Button type='submit' color='inherit' variant="contained" style={btnstyle}>Upload Images</Button>
         </div>
         </Paper>
+        
+    <img src={profileImg} alt="" id="img" className="img" align='center' />
         </Grid>
     </form>
     </div>

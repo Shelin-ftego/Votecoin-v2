@@ -71,9 +71,10 @@ class Verfication extends Component{
 
   verify = async () => {
     const { accounts, contract } = this.state;
-    const response = await contract.methods.verifyVote(this.state.ethAddress).call();
+    // const response = await contract.methods.verifyVote(this.state.ethAddress).call();
+    await contract.methods.verifyVote(this.state.ethAddress).call();
     console.log(this.state.ethAddress);
-    this.setState({candidateVoted: response});
+    // this.setState({candidateVoted: response});
     // 0x85202974e05487Fc01EC59d54D312A5d36BbD209
   };
 

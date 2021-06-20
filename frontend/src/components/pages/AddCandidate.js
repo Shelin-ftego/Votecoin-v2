@@ -59,6 +59,8 @@ class AddCandidate extends Component{
   fetchStatus = async () => {
     const { accounts, contract } = this.state;
 
+    console.log(accounts[0]);
+
     // check the election status on smart contract
     const response = await contract.methods.isVotingOpen().call();
 
@@ -78,6 +80,7 @@ class AddCandidate extends Component{
       }
       const { accounts, contract } = this.state;
       await contract.methods.addCandidate(this.state.party).send({ from: accounts[0] });
+      console.log('web3 added candidate')
     }
     catch(e){
       console.log(e)

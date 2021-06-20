@@ -33,7 +33,9 @@ const useStyles = makeStyles({
 });
 
 
-
+const paperStyle={padding :20,height:'150vh',width:800, margin:"20px auto"};
+const avatarStyle={backgroundColor:'#1bbd7e'};
+const btnstyle={margin:'8px 0'};
 
 
 
@@ -98,26 +100,30 @@ Vote = async(idx)=>{
 
   }
 }
+
   render(){
     return(
-      <div>
-      <MDBContainer>
-        <MDBCard>
-        <MDBCardBody>
+      <div>  
+     <Grid>
+       <Paper elevation={10} style={paperStyle}>
+       <Grid align='center'>
+        <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
+        <h1>Please Vote For A Candidate</h1>
+    </Grid>
+          <Grid align='center'>
           <div>
             <MDBCardTitle>Candidate: {this.props.PartyName}</MDBCardTitle>
             <img src={`http://localhost:4000/voter/candidate/${this.props.PartyName}/image`}></img>
-            <br>
-            </br>
           </div>
-            <button onClick={this.Vote.bind(this,  this.props.Cand_index)}>Vote</button>
-          </MDBCardBody>
-        </MDBCard>
-    </MDBContainer>
+            <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.Vote.bind(this,  this.props.Cand_index)}>Vote</Button>
+          </Grid>
+        </Paper>
+    </Grid>
     </div>
     )
     }
 }
 
 export default Candidate_view
+
 

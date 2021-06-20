@@ -7,7 +7,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import ElectionContract from "../../contracts/Election.json";
 import getWeb3 from "../../getWeb3";
 
-const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
+const paperStyle={padding :20,height:'90vh',width:800, margin:"20px auto"}
 const avatarStyle={backgroundColor:'#1bbd7e'}
 const btnstyle={margin:'8px 0'}
 
@@ -65,7 +65,7 @@ class Verfication extends Component{
 
     // if web3 is not connected, this page is displayed
     if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+    return <div>Loading Web3, accounts, and contract...</div>;
     }
 
     return (
@@ -81,16 +81,20 @@ class Verfication extends Component{
             }
             <h1>{this.state.data}</h1>
             <Grid>
-            <Paper elevation={10} style={this.paperStyle}>
+            <Paper elevation={10} style={paperStyle}>
             <Grid align='center'>
-                   <Avatar style={this.avatarStyle}><LockOutlinedIcon/></Avatar>
+                   <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
                <h2>Check Registration:</h2>
               </Grid>
+              <Grid align='center'>
             <TextField label='Voter Address:' placeholder='Please Enter Voter Address:' /*onChange={this.setState({data:'what is this for'})}*//>
             <br/>
             <br/>
-            <Button type='submit' color='primary' variant="contained" onClick={()=>this.setState({print:true})} style={btnstyle}>Check Voter Address</Button>
-            <TextField >{this.state.candidateVoted}</TextField>
+            <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={()=>this.setState({print:true})} style={btnstyle}>Check Voter Address</Button>
+            <br/>
+            <TextField label='Candidate Voted:' placeholder='Candidate Voted For:'>{this.state.candidateVoted}</TextField>
+            <br/>
+            </Grid>
             </Paper>
             </Grid>
         </div>

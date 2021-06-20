@@ -9,6 +9,7 @@ export default function Support() {
   };
   return (<div>
   <Navbar/>
+ 
   <h1 className='support' style={supportstyle} > SUPPORT </h1>
   <Footer/>
   {/* <Footer/> */}

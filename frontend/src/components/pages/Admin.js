@@ -4,13 +4,16 @@ import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/FaceOutlined';
 
+//import { url } from 'inspector';
+
 function Admin() {
     
     const paperStyle={padding :20,height:'80vh',width:1100, margin:"20px auto"};
     const avatarStyle={backgroundColor:'#1bbd7e'};
     const btnstyle={margin:'8px 0'};
+    //const bgstyle={backgroundImage: src};
     return (
-        <div styles={{ backgroundImage:`url(${'../bg.png'})` }}>
+        <div>
             <NavbarA/>
             <Grid>
                 <Paper elevation={10} style={paperStyle}>

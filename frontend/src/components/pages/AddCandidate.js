@@ -20,7 +20,7 @@ const btnstyle={margin:'8px 0'}
 
 class AddCandidate extends Component{
   // states + web3 states
-  state = { party: undefined, c_image:null , web3: null, accounts: null, contract: null };
+  state = { party: undefined, c_image:null , web3: null, accounts: null, contract: null, status: null };
 
   // web3 initialization
   componentDidMount = async () => {

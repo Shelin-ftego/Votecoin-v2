@@ -55,10 +55,11 @@ class Verfication extends Component{
   verify = async () => {
     const { accounts, contract } = this.state;
     const response = await contract.methods.verifyVote(this.state.ethAddress).call();
+    console.log(this.state.ethAddress);
+    console.log(response);
     this.setState({candidateVoted: response});
 
-    console.log('test123');
-    console.log(this.state.ethAddress);
+
   };
 
     render(){
@@ -85,7 +86,7 @@ class Verfication extends Component{
             <TextField label='Voter Address' placeholder='Please Enter Voter Address' onChange={(e) => this.setState({ethAddress:e.target.value})}/>
             <br/>
             <br/>
-            <Button style={btnstyle} type='submit' color='primary' variant="contained" >Check Voter Address</Button>
+            <Button style={btnstyle} type='submit' color='primary' variant="contained" onClick={this.handleSubmit} >Check Voter Address</Button>
             <br/>
             <TextField label='Candidate Voted' placeholder='Candidate Voted'>{this.state.candidateVoted}</TextField>
             <br/>

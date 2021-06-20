@@ -128,7 +128,7 @@ router.patch('/admin/:id/voter-auth', authentication, async(req, res)=>{
         }
         voter.Registered = true
         await voter.save()
-        res.staus(200).send("voter has been authenticated")
+        res.status(200).send("voter has been authenticated")
     }
     catch(e){
         res.status(400).send(e)

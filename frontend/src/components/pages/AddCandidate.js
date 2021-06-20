@@ -57,8 +57,16 @@ class AddCandidate extends Component{
 
   // add candidate onto blockchain function
   runExample = async () => {
-    const { accounts, contract } = this.state;
-    await contract.methods.addCandidate(this.state.party).send({ from: accounts[0] });
+    try{
+      if(this.state.party==undefined || this.state.c_image==null){
+        throw new Error("Candidate details are not complete")
+      }
+      const { accounts, contract } = this.state;
+      await contract.methods.addCandidate(this.state.party).send({ from: accounts[0] });
+    }
+    catch(e){
+      console.log(e)
+    }
 
     // index to get the last candidate in array
     // var index = await contract.methods.getNumofCandidates().call();
@@ -73,11 +81,20 @@ class AddCandidate extends Component{
 
    handleSubmit = (event) => {
     this.submitCandidate()
+    //'run example' should not be run if there's and error with 
     this.runExample()
     };
 
     submitCandidate = async()=>{
       try{
+        if(this.state.party == undefined){
+          alert("Provide the name of the candidate's political party ")
+          throw new Error("Candidate can not be added")
+        }
+        if(this.state.c_image == null){
+          alert("Provide and image for the new candidate ")
+          throw new Error("Candidate can not be added")
+        }
         const newCandidate = {
             Political_party : this.state.party
         }
@@ -103,15 +120,16 @@ class AddCandidate extends Component{
       }
       catch(e){
         console.log(e)
+        alert("Candidate could not be added")
       }
     }
 
   render(){
     
     // if web3 is not connected, this page is displayed
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
+    //if (!this.state.web3) {
+    //  return <div>Loading Web3, accounts, and contract...</div>;
+    //}
             
     return(
       <div style={{

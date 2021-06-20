@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import NavbarA from '../NavbarA';
-import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core'
+import { Grid,Paper, Avatar, Button, Typography } from '@material-ui/core'
 import ThumbUpIcon from '@material-ui/icons/ThumbUpOutlined';
 
 // web3 imports
 import ElectionContract from "../../contracts/Election.json";
 import getWeb3 from "../../getWeb3";
-
 
 const paperStyle={padding :20,height:'70vh',width:700, margin:"20px auto"};
 const avatarStyle={backgroundColor:'#1bbd7e'};
@@ -24,8 +23,8 @@ class ElectionS extends Component{
           const web3 = await getWeb3();
     
           // Use web3 to get the user's accounts.
-          const accounts = await web3.eth.getAccounts();
-    
+          const accounts = await web3.eth.getAccounts()
+
           // Get the contract instance.
           const networkId = await web3.eth.net.getId();
           const deployedNetwork = ElectionContract.networks[networkId];
@@ -57,7 +56,7 @@ class ElectionS extends Component{
         const response = await contract.methods.isVotingOpen().call();
 
         // update state with status of election
-        if (response == true){
+        if (response === true){
             this.setState({ status: "OPEN" });
         }else{
             this.setState({ status: "CLOSED" });

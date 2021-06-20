@@ -77,18 +77,14 @@ class ElectionS extends Component{
       };
 
     handleStartSubmit = event => {
-        event.preventDefault()
         console.log("start")
         this.start() // call start function
         };
 
     handleStopSubmit = event => {
-        event.preventDefault()
         console.log("stop")
         this.stop() // call stop function
         };
-
-
 
     render(){
     if (!this.state.web3) {

@@ -133,6 +133,10 @@ class Results extends Component{
   ];
 
   render(){
+    if (!this.state.web3) {
+      return <div>Loading Web3, accounts, and contract...</div>;
+    }
+
     // return election results not available when status == true
     if(this.state.status === true){
       return(<div>Election is currently open, results unavailable</div>)

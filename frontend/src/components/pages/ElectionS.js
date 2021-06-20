@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { Component } from 'react';
 import NavbarA from '../NavbarA';
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core'
 import ThumbUpIcon from '@material-ui/icons/ThumbUpOutlined';
@@ -91,6 +91,10 @@ class ElectionS extends Component{
 
 
     render(){
+    if (!this.state.web3) {
+      return <div>Loading Web3, accounts, and contract...</div>;
+    }
+            
     return (
         <div>
             <NavbarA/>

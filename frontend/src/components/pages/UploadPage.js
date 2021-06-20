@@ -67,6 +67,7 @@ const [image, setImage] = useState<File>(input);
       //selfie.append('id', {selfie}.selfie, {selfie}.selfie.name, selfie)
       await axios.post('/voter/upload/id', id_img, config2)
       await axios.post('/voter/upload/selfie', selfie_img, config2)
+      alert("Images have been uploaded")
       //console.log(response2.data)
       ///await axios.post('/voter/upload/selfie', selfie, {headers:{'Content-type':'multipart/form-data', 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token').toString())}`}})
       //history.push('/')
@@ -94,12 +95,12 @@ return (
         <br/>
         <div>
           <label>Upload ID(PNG): </label>
-          <input type='file' id='id' onChange={(e)=>setIDImage(e.target.files[0])} />{/*onChange={(e)=>imageHandler(e.target.files[0]) */}
+          <input type='file' id='id' required onChange={(e)=>setIDImage(e.target.files[0])} />{/*onChange={(e)=>imageHandler(e.target.files[0]) */}
         </div>
         <br/>
         <div>
           <label>Upload Selfie(PNG): </label>
-          <input type='file' id='selfie' onChange={(e)=>setSelfie(e.target.files[0]) }/>
+          <input type='file' id='selfie' required onChange={(e)=>setSelfie(e.target.files[0]) }/>
         </div> 
         <br/>
         <div>

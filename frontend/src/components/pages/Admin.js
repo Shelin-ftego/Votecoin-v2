@@ -13,7 +13,10 @@ function Admin() {
     const btnstyle={margin:'8px 0'};
     //const bgstyle={backgroundImage: src};
     return (
-        <div>
+        <div style={{
+            backgroundImage:
+              "url(" + require("./bg.png").default + ")",
+          }}>
             <NavbarA/>
             <Grid>
                 <Paper elevation={10} style={paperStyle}>

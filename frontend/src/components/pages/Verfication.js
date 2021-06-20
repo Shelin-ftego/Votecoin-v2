@@ -69,7 +69,10 @@ class Verfication extends Component{
     }
 
     return (
-        <div>
+        <div style={{
+          backgroundImage:
+            "url(" + require("./bg.png").default + ")",
+        }}>
             <NavbarV/>
             {
                 this.state.print?

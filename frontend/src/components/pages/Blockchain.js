@@ -53,7 +53,10 @@ function Blockchain() {
         const btnstyle={margin:'8px 0'};
 
     return (
-        <div>
+        <div style={{
+          backgroundImage:
+            "url(" + require("./bg.png").default + ")",
+        }}>
           <NavbarA/>
           
         <Grid>

@@ -145,7 +145,10 @@ class Results extends Component{
     }
 
     return (
-      <div>
+      <div style={{
+        backgroundImage:
+          "url(" + require("./bg.png").default + ")",
+      }}>
           <NavbarV/>
         <h1>Results</h1>
         <TableContainer component={Paper}>

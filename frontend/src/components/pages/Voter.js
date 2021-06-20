@@ -7,14 +7,17 @@ import FaceIcon from '@material-ui/icons/FaceOutlined';
 
 function Voter() {
 
-    const paperStyle={padding :20,height:'80vh',width:1100, margin:"20px auto"};
+    const paperStyle={padding :20,height:'80vh',width:700, margin:"20px auto",backgroundColor:'white'};
     const avatarStyle={backgroundColor:'#1bbd7e'};
     const btnstyle={margin:'8px 0'};
 
     return (
-        <div>
+        <div style={{
+            backgroundImage:
+              "url(" + require("./bg.png").default + ")",
+          }}>
             <NavbarV/>
-            <Grid>
+            <Grid >
                 <Paper elevation={10} style={paperStyle}>
                     <Grid align='center'>
                         <Avatar style={avatarStyle}><FaceIcon/></Avatar>

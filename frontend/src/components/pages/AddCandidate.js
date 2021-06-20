@@ -114,7 +114,10 @@ class AddCandidate extends Component{
     }
             
     return(
-      <div> 
+      <div style={{
+        backgroundImage:
+          "url(" + require("./bg.png").default + ")",
+      }}> 
       <NavbarA/>
       <form onSubmit={this.handleSubmit}>
       <Grid> 

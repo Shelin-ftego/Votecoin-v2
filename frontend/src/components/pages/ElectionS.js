@@ -94,7 +94,10 @@ class ElectionS extends Component{
     }
 
     return (
-        <div>
+        <div style={{
+          backgroundImage:
+            "url(" + require("./bg.png").default + ")",
+        }}>
             <NavbarA/>
             <Grid>
             <Paper elevation={10} style={paperStyle}>

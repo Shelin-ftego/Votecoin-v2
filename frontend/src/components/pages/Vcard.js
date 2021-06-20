@@ -50,7 +50,10 @@ import NavbarV from '../NavbarV';
       }, [])
 
   return (
-    <div>
+    <div style={{
+      backgroundImage:
+        "url(" + require("./bg.png").default + ")",
+    }}>
       <NavbarV/>
       {
           candidates.map((cand, index) => <Candidate_view PartyName={cand.Political_party} Cand_index ={index} />)

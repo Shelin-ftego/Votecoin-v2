@@ -3,6 +3,7 @@ import '../../App.css';
 // import Footer from '../Footer';
 import Navbar from '../Navbar';
 //import Footer from '../Footer';
+import {Button, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Row, Col} from "reactstrap";
 
 export default function About() {
   const aboutstyle={

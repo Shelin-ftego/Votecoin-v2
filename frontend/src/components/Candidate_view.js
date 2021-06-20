@@ -13,8 +13,7 @@ import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBContainer } from "m
 import ElectionContract from "../contracts/Election.json";
 import getWeb3 from "../getWeb3";
 
-
-//Card design 
+// Card design 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -32,19 +31,16 @@ const useStyles = makeStyles({
   },
 });
 
-
 const paperStyle={padding :20,height:'150vh',width:800, margin:"20px auto"};
 const avatarStyle={backgroundColor:'#1bbd7e'};
 const btnstyle={margin:'8px 0'};
 
-
-
-//WEB 3 can be called in the vote function; the candidate index is 'idx'
+//web3 can be called in the vote function; the candidate index is 'idx'
 
 class Candidate_view extends Component{
 
     // states + web3 states
-    state = { party: undefined, image:undefined, web3: null, accounts: null, contract: null };
+    state = { party: undefined, image:undefined, web3: null, accounts: null, contract: null, status: null };
   // web3 initialization
   componentDidMount = async () => {
     try {
@@ -78,29 +74,46 @@ class Candidate_view extends Component{
     }
   };
 
+    // fetch election status
+    fetchStatus = async () => {
+      const { accounts, contract } = this.state;
+  
+      // check the election status on smart contract
+      const response = await contract.methods.isVotingOpen().call();
+  
+      // update state with status of election
+      if (response === true){
+          this.setState({ status: true });
+      }else{
+          this.setState({ status: false });
+      }    
+    };
+
 
 Vote = async(idx)=>{
-  try{
-    if(!window.confirm("Confirm this vote \n (Submitted votes cannot be changed)")){
-      throw new Error("Vote rejected")
-    }
-    const token = localStorage.getItem('token')
-    const config ={
-      headers:{
-        "Content-type": "multipart/form-data",
-        "Authorization": "Bearer "+ token
+  if (this.state.status){ // if election is open
+    try{
+      if(!window.confirm("Confirm this vote \n (Submitted votes cannot be changed)")){
+        throw new Error("Vote rejected")
       }
+      const token = localStorage.getItem('token')
+      const config ={
+        headers:{
+          "Content-type": "multipart/form-data",
+          "Authorization": "Bearer "+ token
+        }
+      }
+      const response = await axios.patch('/voter/vote',{}, config)
+      console.log("voted for "+idx)
+  
+      // call function from smart contract to vote
+      const { accounts, contract } = this.state;
+      await contract.methods.vote(idx).send({ from: accounts[0] });
+      
     }
-    const response = await axios.patch('/voter/vote',{}, config)
-    console.log("voted for "+idx)
-
-    // call function from smart contract to vote
-    const { accounts, contract } = this.state;
-    await contract.methods.vote(idx).send({ from: accounts[0] });
-    
-  }
-  catch(e){
-    alert("Vote was not processed")
+    catch(e){
+      alert("Vote was not processed")
+    }
   }
 }
 

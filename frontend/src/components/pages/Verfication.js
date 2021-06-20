@@ -38,7 +38,7 @@ class Verfication extends Component{
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, accounts, contract: instance }, this.fetchStatus);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -48,17 +48,33 @@ class Verfication extends Component{
     }
   };
 
+  // fetch election status
+  fetchStatus = async () => {
+    const { accounts, contract } = this.state;
+
+    // check the election status on smart contract
+    const response = await contract.methods.isVotingOpen().call();
+
+    // update state with status of election
+    if (response === true){
+        this.setState({ status: true });
+    }else{
+        this.setState({ status: false });
+    }    
+  };  
+
   handleSubmit = (event) => {
-    this.verify();
+    if (!this.state.status){ // if election is closed
+      this.verify();
+    }
   };
 
   verify = async () => {
     const { accounts, contract } = this.state;
     const response = await contract.methods.verifyVote(this.state.ethAddress).call();
-    this.setState({candidateVoted: response});
-
-    console.log('test123');
     console.log(this.state.ethAddress);
+    this.setState({candidateVoted: response});
+    // 0x85202974e05487Fc01EC59d54D312A5d36BbD209
   };
 
     render(){
@@ -85,7 +101,7 @@ class Verfication extends Component{
             <TextField label='Voter Address' placeholder='Please Enter Voter Address' onChange={(e) => this.setState({ethAddress:e.target.value})}/>
             <br/>
             <br/>
-            <Button style={btnstyle} type='submit' color='primary' variant="contained" >Check Voter Address</Button>
+            <Button style={btnstyle} type='submit' color='primary' variant="contained" onClick={this.handleSubmit} >Check Voter Address</Button>
             <br/>
             <TextField label='Candidate Voted' placeholder='Candidate Voted'>{this.state.candidateVoted}</TextField>
             <br/>

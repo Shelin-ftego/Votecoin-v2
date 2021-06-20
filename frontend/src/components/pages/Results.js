@@ -72,7 +72,7 @@ class Results extends Component{
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.fetchResults);
+      this.setState({ web3, accounts, contract: instance }, this.fetchStatus, this.fetchResults);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -82,40 +82,58 @@ class Results extends Component{
     }
   };
 
+    // fetch election status
+    fetchStatus = async () => {
+      const { accounts, contract } = this.state;
+  
+      // check the election status on smart contract
+      const response = await contract.methods.isVotingOpen().call();
+  
+      // update state with status of election
+      if (response === true){
+          this.setState({ status: true });
+      }else{
+          this.setState({ status: false });
+      }    
+    };
+
   // get results from blockchain
   fetchResults = async () => {
-    const { accounts, contract } = this.state;
+    if (!this.state.status){ // if election is closed
+      const { accounts, contract } = this.state;
     
-    // check the election status on smart contract
-    const response0 = await contract.methods.isVotingOpen().call();
-
-    // update state with status of election
-    if (response0 === true){
-      this.setState({ status: true });
-    }else{
-      this.setState({ status: false });
-    } 
-
-    const totalVotes = await contract.methods.totalVotes().call(); // get total votes
-
-    // index to get the last candidate in array
-    var index = (await contract.methods.getNumofCandidates().call()) - 1;
-    console.log(index);
-
-    if (this.state.status === false){
-      if (index>=0){
-        const winnerObj = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
-        this.setState({ winner: winnerObj[1] });
-        console.log(this.state.winner);
-        
-        for (var i=0; i<=index; i++){
-          const response = await contract.methods.getCandidate(i).call(); // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
-          // store response[1] into table // party name
-          // store response[2] into table // votes received
-          const votesPercent = response[2]/totalVotes * 100 // % of votes received
-          // rows[i] = this.createData(i, response[1], response[2], votesPercent);
-    }
+      // check the election status on smart contract
+      const response0 = await contract.methods.isVotingOpen().call();
+  
+      // update state with status of election
+      if (response0 === true){
+        this.setState({ status: true });
+      }else{
+        this.setState({ status: false });
+      } 
+  
+      const totalVotes = await contract.methods.totalVotes().call(); // get total votes
+  
+      // index to get the last candidate in array
+      var index = (await contract.methods.getNumofCandidates().call()) - 1;
+      console.log(index);
+  
+      if (!this.state.status){ // if election is closed
+        if (index>=0){
+          const winnerObj = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
+          this.setState({ winner: winnerObj[1] });
+          console.log(this.state.winner);
+          
+          for (var i=0; i<=index; i++){
+            const response = await contract.methods.getCandidate(i).call(); // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
+            // store response[1] into table // party name
+            // store response[2] into table // votes received
+            const votesPercent = response[2]/totalVotes * 100 // % of votes received
+            // rows[i] = this.createData(i, response[1], response[2], votesPercent);
       }
+        }
+      }
+      
     }
   }; 
 

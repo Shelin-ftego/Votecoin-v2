@@ -49,6 +49,7 @@ class ElectionS extends Component{
         }
       };
     
+      // fetch election status
       fetchStatus = async () => {
         const { accounts, contract } = this.state;
     

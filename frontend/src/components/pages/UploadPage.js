@@ -77,12 +77,15 @@ const [image, setImage] = useState<File>(input);
       console.log(e)
     }
   }
-  const paperStyle={padding :20,height:'40vh',width:600, margin:"20px auto"}
+  const paperStyle={padding :20,height:'80vh',width:600, margin:"20px auto"}
   const avatarStyle={backgroundColor:'#1bbd7e'}
   const btnstyle={margin:'8px 0'}
 
 return (
-    <div>
+    <div style={{
+      backgroundImage:
+        "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
+    }}>
     <NavbarV/>
       <form onSubmit={handleSubmit}>
         
@@ -110,7 +113,9 @@ return (
         
    {/* <img src={profileImg} alt="" id="profileImg" className="img" align='center' />*/} 
         </Grid>
+        <br/>
     </form>
+    <br/>
     </div>
 )
 }

@@ -66,7 +66,7 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
   return(
     <div style={{
       backgroundImage:
-        "url(" + require("./bg.png").default + ")",
+        "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
     }}> 
     <Navbar/>
     <form onSubmit={this.handleSubmit}>

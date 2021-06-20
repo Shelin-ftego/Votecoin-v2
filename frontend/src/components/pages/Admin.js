@@ -15,7 +15,7 @@ function Admin() {
     return (
         <div style={{
             backgroundImage:
-              "url(" + require("./bg.png").default + ")",
+              "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
           }}>
             <NavbarA/>
             <Grid>

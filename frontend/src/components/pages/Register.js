@@ -22,6 +22,7 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
               };
               //add checks for all states to ensure that all fields have been filled out
               if(this.state.password!= this.state.confirmi){
+                alert("Passwords do not match")
                 throw new Error("Passwords do not match");
               }
               const newVoter = {
@@ -42,17 +43,18 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
                 }
               }
               const response = await axios.post('/voter/register', JSON.stringify(newVoter), config1)
+              alert("You are now registered")
               localStorage.setItem('token', response.data.token )
-              console.log(localStorage.getItem('token'))
+              //needs to transition
             }
             catch(e){
               console.log(e)
+              alert("You could not be added")
             }
           }
   handleSubmit = event => {
     event.preventDefault()
     this.submitVoter()
-    
     };
     
   
@@ -75,36 +77,36 @@ NOTE: YOU CAN INIT WEB3 IN COMPONENT DID MOUNT AND AUTHORIZE THE VOTER IN 'handl
      </Grid>
      <h4> Please fill in the following information:</h4> 
         <div>
-            <TextField label='ID' placeholder='Please enter identification number' onChange={(e) => this.setState({ID:e.target.value})}/>
+            <TextField label='ID' placeholder='Please enter identification number' required onChange={(e) => this.setState({ID:e.target.value})}/>
         </div>
         <div>
-            <TextField label='Name' placeholder='Please enter First Name' onChange={(e) => this.setState({name:e.target.value})}/>
+            <TextField label='Name' placeholder='Please enter First Name' required onChange={(e) => this.setState({name:e.target.value})}/>
         </div>
         <div>
-            <TextField label='Surname' placeholder='Please enter Surname' onChange={(e) => this.setState({surname:e.target.value})}/>
+            <TextField label='Surname' placeholder='Please enter Surname' required onChange={(e) => this.setState({surname:e.target.value})}/>
         </div>
         <br/>
         <div>
           <h4>Address:</h4>
             <div>
-                <TextField label='Province' placeholder='Please enter Province' onChange={(e) => this.setState({province:e.target.value})}/>
+                <TextField label='Province' placeholder='Please enter Province' required onChange={(e) => this.setState({province:e.target.value})}/>
             </div>
             <div>
-                <TextField label='Municipality' placeholder='Please enter Municipality' onChange={(e) => this.setState({municipality:e.target.value})}/>
+                <TextField label='Municipality' placeholder='Please enter Municipality' required onChange={(e) => this.setState({municipality:e.target.value})}/>
             </div>
             <div>
-                <TextField label='Ward' placeholder='Please enter Ward' onChange={(e) => this.setState({ward:e.target.value})}/>
+                <TextField label='Ward' placeholder='Please enter Ward' required onChange={(e) => this.setState({ward:e.target.value})}/>
             </div>
             <div>
-                <TextField label='Distinct' placeholder='Distinct' onChange={(e) => this.setState({district:e.target.value})}/>
+                <TextField label='Distinct' placeholder='Distinct' required onChange={(e) => this.setState({district:e.target.value})}/>
             </div>
         </div>
         <h4>Password:</h4>
         <div>
-              <TextField label='Password' placeholder='Please enter password' type='password' onChange={(e) => this.setState({password:e.target.value})}/>
+              <TextField label='Password' placeholder='Please enter password' type='password' required onChange={(e) => this.setState({password:e.target.value})}/>
         </div>
         <div>
-              <TextField label='Confirm Password' placeholder='Please enter Confirm password' type='password' onChange={(e) => this.setState({confirmi:e.target.value})}/>    
+              <TextField label='Confirm Password' placeholder='Please enter Confirm password' type='password' required onChange={(e) => this.setState({confirmi:e.target.value})}/>    
         </div>
         <Grid align='center'>
           <Button type='submit' color='inherit' variant="contained" style={this.btnstyle} align='center'>Register</Button>

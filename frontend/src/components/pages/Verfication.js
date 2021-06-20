@@ -1,6 +1,6 @@
-import React, {useState, Component} from 'react';
+import React, {Component} from 'react';
 import NavbarV from '../NavbarV';  
-import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
+import { Grid,Paper, Avatar, TextField, Button} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 // web3 imports
@@ -13,7 +13,7 @@ const btnstyle={margin:'8px 0'}
 
 class Verfication extends Component{
     // states + web3 states
-    state = { data:undefined, print:undefined, ethAddress: undefined, candidateVoted:undefined, web3: null, accounts: null, contract: null, status: null}
+    state = { ethAddress: undefined, candidateVoted:undefined, web3: null, accounts: null, contract: null, status: null}
 
   // web3 initialization
   componentDidMount = async () => {
@@ -48,18 +48,18 @@ class Verfication extends Component{
     }
   };
 
+  handleSubmit = (event) => {
+    this.verify();
+  };
+
   verify = async () => {
     const { accounts, contract } = this.state;
     const response = await contract.methods.verifyVote(this.state.ethAddress).call();
     this.setState({candidateVoted: response});
-  };
 
-    getData(val)
-    {
-        this.setState({data:val})
-        console.warn(val.target.value)
-        this.verify();
-    } 
+    console.log('test123');
+    console.log(this.state.ethAddress);
+  };
 
     render(){
 
@@ -74,25 +74,20 @@ class Verfication extends Component{
             "url(" + require("./bg.png").default + ")",
         }}>
             <NavbarV/>
-            {
-                this.state.print?
-                <h1>{this.state.data}</h1>
-                :null
-            }
-            <h1>{this.state.data}</h1>
+            
             <Grid>
             <Paper elevation={10} style={paperStyle}>
             <Grid align='center'>
                    <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-               <h2>Check Registration:</h2>
+               <h2>Verify Your Vote</h2>
               </Grid>
               <Grid align='center'>
-            <TextField label='Voter Address:' placeholder='Please Enter Voter Address:' /*onChange={this.setState({data:'what is this for'})}*//>
+            <TextField label='Voter Address' placeholder='Please Enter Voter Address' onChange={(e) => this.setState({ethAddress:e.target.value})}/>
             <br/>
             <br/>
-            <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={()=>this.setState({print:true})} style={btnstyle}>Check Voter Address</Button>
+            <Button style={btnstyle} type='submit' color='primary' variant="contained" >Check Voter Address</Button>
             <br/>
-            <TextField label='Candidate Voted:' placeholder='Candidate Voted For:'>{this.state.candidateVoted}</TextField>
+            <TextField label='Candidate Voted' placeholder='Candidate Voted'>{this.state.candidateVoted}</TextField>
             <br/>
             </Grid>
             </Paper>

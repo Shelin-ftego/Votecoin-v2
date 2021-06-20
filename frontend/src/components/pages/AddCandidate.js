@@ -72,6 +72,15 @@ class AddCandidate extends Component{
     }    
   };
 
+   handleSubmit = (event) => {
+    //  event.preventDefault();
+     if(!this.state.status){ // if election is closed
+      this.runExample()
+      this.submitCandidate()
+      console.log('added on database')
+     }
+    };
+
   // add candidate onto blockchain
   runExample = async () => {
     try{
@@ -80,19 +89,12 @@ class AddCandidate extends Component{
       }
       const { accounts, contract } = this.state;
       await contract.methods.addCandidate(this.state.party).send({ from: accounts[0] });
-      console.log('web3 added candidate')
+      console.log('added on blockchain')
     }
     catch(e){
       console.log(e)
     }
   };
-
-   handleSubmit = (event) => {
-     if(!this.state.status){ // if election is closed
-      this.submitCandidate()
-      this.runExample()
-     }
-    };
 
     submitCandidate = async()=>{
       try{
@@ -151,7 +153,7 @@ class AddCandidate extends Component{
       <NavbarA/>
       <form onSubmit={this.handleSubmit}>
       <Grid> 
-        <h1 align='center'>Add New Candidates:</h1>
+        <h1 align='center'>Add Candidate</h1>
         <Paper elevation={10} style={paperStyle}>
     <Grid align='center'>
         <Avatar style={avatarStyle}><GroupIcon/></Avatar>

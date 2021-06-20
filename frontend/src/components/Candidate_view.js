@@ -110,6 +110,7 @@ Vote = async(idx)=>{
       // call function from smart contract to vote
       const { accounts, contract } = this.state;
       await contract.methods.vote(idx).send({ from: accounts[0] });
+      console.log('voted on blockchain')
       
     }
     catch(e){
@@ -125,7 +126,7 @@ Vote = async(idx)=>{
        <Paper elevation={10} style={paperStyle}>
        <Grid align='center'>
         <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-        <h1>Please Vote For A Candidate</h1>
+        <h1>Vote Candidate</h1>
     </Grid>
           <Grid align='center'>
           <div>

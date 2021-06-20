@@ -74,29 +74,46 @@ class Candidate_view extends Component{
     }
   };
 
+    // fetch election status
+    fetchStatus = async () => {
+      const { accounts, contract } = this.state;
+  
+      // check the election status on smart contract
+      const response = await contract.methods.isVotingOpen().call();
+  
+      // update state with status of election
+      if (response === true){
+          this.setState({ status: true });
+      }else{
+          this.setState({ status: false });
+      }    
+    };
+
 
 Vote = async(idx)=>{
-  try{
-    if(!window.confirm("Confirm this vote \n (Submitted votes cannot be changed)")){
-      throw new Error("Vote rejected")
-    }
-    const token = localStorage.getItem('token')
-    const config ={
-      headers:{
-        "Content-type": "multipart/form-data",
-        "Authorization": "Bearer "+ token
+  if (this.state.status){ // if election is open
+    try{
+      if(!window.confirm("Confirm this vote \n (Submitted votes cannot be changed)")){
+        throw new Error("Vote rejected")
       }
+      const token = localStorage.getItem('token')
+      const config ={
+        headers:{
+          "Content-type": "multipart/form-data",
+          "Authorization": "Bearer "+ token
+        }
+      }
+      const response = await axios.patch('/voter/vote',{}, config)
+      console.log("voted for "+idx)
+  
+      // call function from smart contract to vote
+      const { accounts, contract } = this.state;
+      await contract.methods.vote(idx).send({ from: accounts[0] });
+      
     }
-    const response = await axios.patch('/voter/vote',{}, config)
-    console.log("voted for "+idx)
-
-    // call function from smart contract to vote
-    const { accounts, contract } = this.state;
-    await contract.methods.vote(idx).send({ from: accounts[0] });
-    
-  }
-  catch(e){
-    alert("Vote was not processed")
+    catch(e){
+      alert("Vote was not processed")
+    }
   }
 }
 

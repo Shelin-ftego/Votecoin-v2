@@ -38,7 +38,7 @@ class Verfication extends Component{
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, accounts, contract: instance }, this.fetchStatus);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -48,18 +48,33 @@ class Verfication extends Component{
     }
   };
 
+  // fetch election status
+  fetchStatus = async () => {
+    const { accounts, contract } = this.state;
+
+    // check the election status on smart contract
+    const response = await contract.methods.isVotingOpen().call();
+
+    // update state with status of election
+    if (response === true){
+        this.setState({ status: true });
+    }else{
+        this.setState({ status: false });
+    }    
+  };  
+
   handleSubmit = (event) => {
-    this.verify();
+    if (!this.state.status){ // if election is closed
+      this.verify();
+    }
   };
 
   verify = async () => {
     const { accounts, contract } = this.state;
     const response = await contract.methods.verifyVote(this.state.ethAddress).call();
     console.log(this.state.ethAddress);
-    console.log(response);
     this.setState({candidateVoted: response});
-
-
+    // 0x85202974e05487Fc01EC59d54D312A5d36BbD209
   };
 
     render(){

@@ -45,7 +45,7 @@ class AddCandidate extends Component{
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, accounts, contract: instance }, this.fetchStatus);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -53,6 +53,21 @@ class AddCandidate extends Component{
       );
       console.error(error);
     }
+  };
+
+  // fetch election status
+  fetchStatus = async () => {
+    const { accounts, contract } = this.state;
+
+    // check the election status on smart contract
+    const response = await contract.methods.isVotingOpen().call();
+
+    // update state with status of election
+    if (response === true){
+        this.setState({ status: true });
+    }else{
+        this.setState({ status: false });
+    }    
   };
 
   // add candidate onto blockchain function
@@ -80,9 +95,10 @@ class AddCandidate extends Component{
   };
 
    handleSubmit = (event) => {
-    this.submitCandidate()
-    //'run example' should not be run if there's and error with 
-    this.runExample()
+     if(!this.state.status){ // if election is closed
+      this.submitCandidate()
+      this.runExample()
+     }
     };
 
     submitCandidate = async()=>{

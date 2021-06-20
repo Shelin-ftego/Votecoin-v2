@@ -21,6 +21,7 @@ import NavbarV from '../NavbarV';
   const [candidates,setCandidates] = useState([
     {Political_party:'Default'}
   ])
+  const [candidate_image, setCandidate_image] = useState(undefined)
   
 
     const getCandidates = async()=>{
@@ -52,7 +53,7 @@ import NavbarV from '../NavbarV';
     <div>
       <NavbarV/>
       {
-          candidates.map((cand, index) => <Candidate_view PartyName={cand.Political_party} Cand_index ={index}/>)
+          candidates.map((cand, index) => <Candidate_view PartyName={cand.Political_party} Cand_index ={index} />)
       }
     </div>
  )

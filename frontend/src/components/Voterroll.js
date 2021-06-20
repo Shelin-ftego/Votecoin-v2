@@ -70,11 +70,11 @@ const Voterroll = function (props){
                                       padding: '100px'
                                     }}} ariaHideApp={false}>
                 <div>
-                  <h1>{props.ID}</h1>
+                  <h1>{props.ID}</h1> 
                 </div>
                 <div>
                    <h2> Identity document</h2>     
-                   <img src ={image} ></img>              
+                   <img src ={image} ></img>  
                 </div>
                 <div>
                    <h2> Selfie</h2>     

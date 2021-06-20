@@ -42,8 +42,7 @@ const useStyles = makeStyles({
 class Candidate_view extends Component{
 
     // states + web3 states
-    state = { party: undefined, web3: null, accounts: null, contract: null };
-
+    state = { party: undefined, image:undefined, web3: null, accounts: null, contract: null };
   // web3 initialization
   componentDidMount = async () => {
     try {
@@ -105,7 +104,12 @@ Vote = async(idx)=>{
       <MDBContainer>
         <MDBCard>
         <MDBCardBody>
+          <div>
             <MDBCardTitle>Candidate: {this.props.PartyName}</MDBCardTitle>
+            <img src={`http://localhost:4000/voter/candidate/${this.props.PartyName}/image`}></img>
+            <br>
+            </br>
+          </div>
             <button onClick={this.Vote.bind(this,  this.props.Cand_index)}>Vote</button>
           </MDBCardBody>
         </MDBCard>

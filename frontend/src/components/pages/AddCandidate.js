@@ -20,7 +20,7 @@ const btnstyle={margin:'8px 0'}
 
 class AddCandidate extends Component{
   // states + web3 states
-  state = { party: undefined, name: undefined, surname:undefined, age:undefined, web3: null, accounts: null, contract: null };
+  state = { party: undefined, c_image:null , web3: null, accounts: null, contract: null };
 
   // web3 initialization
   componentDidMount = async () => {
@@ -96,8 +96,11 @@ class AddCandidate extends Component{
           }
         }
   
-        const response = await axios.post('/admin/election-admin/candidate', JSON.stringify(newCandidate), config1)
-        //need to do a page transition
+        await axios.post('/admin/election-admin/candidate', JSON.stringify(newCandidate), config1)
+        const candidate_img = new FormData()
+        candidate_img.append('image', this.state.c_image, this.state.c_image.name)
+        await axios.post(`/admin/election-admin/${this.state.party}/image`, candidate_img, config2)
+          //need to do a page transition
       }
       catch(e){
         console.log(e)
@@ -111,7 +114,6 @@ class AddCandidate extends Component{
       <form onSubmit={this.handleSubmit}>
       <Grid> 
         <h1 align='center'>Add New Candidates:</h1>
-
         <Paper elevation={10} style={paperStyle}>
     <Grid align='center'>
         <Avatar style={avatarStyle}><GroupIcon/></Avatar>
@@ -123,7 +125,7 @@ class AddCandidate extends Component{
      </Grid>
             <br/>
     <Grid>            <label>Select Image to Upload: </label>
-               <input type='file' name='file'/>
+               <input type='file' id='image' name='file' onChange={(e)=> this.setState({c_image:e.target.files[0]}) }/>
                <br/>
                </Grid>
          <br/>

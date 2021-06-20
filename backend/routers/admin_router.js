@@ -39,8 +39,8 @@ router.post('/admin/election-admin/candidate', authentication, async (req, res)=
 router.post('/admin/election-admin/:party/image', authentication, upload_image.single('image'), async(req, res)=>{
     try{
     //does not have to be here because we have authentication
-        const buffer = await sharp(req.file.buffer).png().toBuffer()
-        const candidate = await Candidate.find({Political_party:req.params.party})
+        const buffer = await sharp(req.file.buffer).resize(200,200).png().toBuffer()
+        const candidate = await Candidate.findforAdmin(req.params.party)
         candidate.Candidate_image = buffer
         await candidate.save()
         res.send()

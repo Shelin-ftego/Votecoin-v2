@@ -77,20 +77,22 @@ class ElectionS extends Component{
       };
 
     handleStartSubmit = event => {
-        console.log("start")
         this.start() // call start function
+        console.log("start")
         };
 
     handleStopSubmit = event => {
-        console.log("stop")
         this.stop() // call stop function
+        console.log("stop")
         };
 
-    render(){
+    render(){   
+    
+    // if web3 is not connected, this page is displayed
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
-            
+
     return (
         <div>
             <NavbarA/>

@@ -133,9 +133,11 @@ class Results extends Component{
   ];
 
   render(){
+    
+    // if web3 is not connected, this page is displayed
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
-    }
+    }    
 
     // return election results not available when status == true
     if(this.state.status === true){

@@ -60,7 +60,10 @@ checkUser()
 
     return (
         <form  onSubmit = {handleSubmit}>
-            <div>
+            <div style={{
+      backgroundImage:
+        "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
+    }}>
                 <Navbar/>
                         <Grid>
                 <Paper elevation={10} style={paperStyle}>
@@ -82,6 +85,19 @@ checkUser()
                     </Typography>
                 </Paper>
             </Grid>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+
             </div>
         </form>
     )}

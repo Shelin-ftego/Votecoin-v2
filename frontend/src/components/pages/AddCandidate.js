@@ -178,7 +178,15 @@ class AddCandidate extends Component{
         </Paper>
         </Grid>
       </form>
-    <Footer/>
+      {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+
     </div>)
   }
 }

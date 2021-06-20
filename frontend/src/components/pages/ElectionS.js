@@ -119,6 +119,18 @@ class ElectionS extends Component{
          <br/>        
             </Paper>
             </Grid>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
         </div>
     )
     }

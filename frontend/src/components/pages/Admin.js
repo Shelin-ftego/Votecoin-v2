@@ -52,6 +52,10 @@ function Admin() {
             {/*<Footer/>*/}
                 </Paper>
             </Grid>
+            {' '}
+            <br/>
+            {' '}
+            <br/>
         </div>
     )
 }

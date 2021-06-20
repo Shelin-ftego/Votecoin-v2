@@ -21,8 +21,8 @@ function Voter() {
                 <Paper elevation={10} style={paperStyle}>
                     <Grid align='center'>
                         <Avatar style={avatarStyle}><FaceIcon/></Avatar>
-                        <h1>Welcome Voter</h1>
-                        <h1>Here you are able to: </h1>
+                        <h1>Welcome Voter!</h1>
+                        <h1>What would you like to do? </h1>
                     </Grid>
                     <h1 align='center'> 
                     <Link to='/Vcard' >
@@ -32,19 +32,19 @@ function Voter() {
             <br/>
             <h1 align='center'> 
                     <Link to='/verify' >
-                    -Verify if your vote has been cast   
+                    -Verify Your Vote   
                     </Link> 
                     </h1>  
               <br/>
               <h1 align='center'> 
                     <Link to='/results' >
-                    -View Results when available   
+                    -View Results  
                     </Link> 
                     </h1>  
                     <br/>
               <h1 align='center'> 
                     <Link to='/upload' >
-                    -Upload required documents  
+                    -Upload Required Documents  
                     </Link> 
                     </h1>  
             <br/>

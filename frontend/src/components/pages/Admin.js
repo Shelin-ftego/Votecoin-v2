@@ -22,8 +22,8 @@ function Admin() {
                 <Paper elevation={10} style={paperStyle}>
                     <Grid align='center'>
                         <Avatar style={avatarStyle}><FaceIcon/></Avatar>
-                        <h1>Welcome Back Administrator</h1>
-                        <h1>What would you like to do: </h1>
+                        <h1>Welcome Back Administrator!</h1>
+                        <h1>What would you like to do? </h1>
                     </Grid>
                     <h1 align='center'> 
                     <Link to='/add-candidate' >
@@ -33,7 +33,7 @@ function Admin() {
             <br/>
             <h1 align='center'> 
                     <Link to='/electionstatus' >
-                    -Change/View current election period   
+                    -Change/View Current Election Period   
                     </Link> 
                     </h1>  
               <br/>

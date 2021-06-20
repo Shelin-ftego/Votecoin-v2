@@ -58,6 +58,27 @@ import NavbarV from '../NavbarV';
       {
           candidates.map((cand, index) => <Candidate_view PartyName={cand.Political_party} Cand_index ={index} />)
       }
+
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
     </div>
  )
 }

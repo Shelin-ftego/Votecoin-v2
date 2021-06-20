@@ -7,7 +7,7 @@ import FaceIcon from '@material-ui/icons/FaceOutlined';
 
 function Voter() {
 
-    const paperStyle={padding :20,height:'80vh',width:700, margin:"20px auto",backgroundColor:'white'};
+    const paperStyle={padding :20,height:'85vh',width:700, margin:"20px auto",backgroundColor:'white'};
     const avatarStyle={backgroundColor:'#1bbd7e'};
     const btnstyle={margin:'8px 0'};
 
@@ -51,6 +51,7 @@ function Voter() {
             {/*<Footer/>*/}
                 </Paper>
             </Grid>
+            <br/>
         </div>
     )
 }

@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-const paperStyle={padding :20,height:'150vh',width:800, margin:"20px auto"};
+const paperStyle={padding :20,height:'60vh',width:600, margin:"20px auto"};
 const avatarStyle={backgroundColor:'#1bbd7e'};
 const btnstyle={margin:'8px 0'};
 

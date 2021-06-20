@@ -168,7 +168,7 @@ class Results extends Component{
           "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
       }}>
           <NavbarV/>
-        <h1>Results</h1>
+        <h1 align='center'>Results</h1>
         <TableContainer component={Paper}>
         <Table  aria-label="customized table">
           <TableHead>
@@ -193,7 +193,27 @@ class Results extends Component{
           </TableBody>
         </Table>
       </TableContainer>
-      <h1>WINNER: {this.state.winner}</h1>
+      <br/>
+      <h1 align='center'>WINNER: {this.state.winner}</h1>
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
       </div>
   )
 }

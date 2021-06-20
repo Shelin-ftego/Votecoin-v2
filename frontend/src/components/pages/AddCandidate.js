@@ -71,8 +71,7 @@ class AddCandidate extends Component{
     // console.log(response[2]);
   };
 
-   handleSubmit = event => {
-    event.preventDefault()
+   handleSubmit = (event) => {
     this.submitCandidate()
     this.runExample()
     };
@@ -125,7 +124,7 @@ class AddCandidate extends Component{
      </Grid>
             <br/>
     <Grid>            <label>Select Image to Upload: </label>
-               <input type='file' id='image' name='file' onChange={(e)=> this.setState({c_image:e.target.files[0]}) }/>
+               <input type='file' id='image' onChange={(e)=> this.setState({c_image:e.target.files[0]}) }/>
                <br/>
                </Grid>
          <br/>

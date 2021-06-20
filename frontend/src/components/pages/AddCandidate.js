@@ -116,6 +116,9 @@ class AddCandidate extends Component{
         const candidate_img = new FormData()
         candidate_img.append('image', this.state.c_image, this.state.c_image.name)
         await axios.post(`/admin/election-admin/${this.state.party}/image`, candidate_img, config2)
+        if(!window.confirm("Are you sure you want to add this candidate?")){
+          throw new Error("Rejected candidate")
+        }
           //need to do a page transition
       }
       catch(e){

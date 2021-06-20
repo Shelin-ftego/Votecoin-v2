@@ -13,8 +13,8 @@ const history = useHistory();
 const [click, setClick] = useState(false);
 const [button, setButton] = useState(true);
 
- const [id, SetID] = useState("");
-const [password, SetPassword] = useState("");
+const [id, SetID] = useState(undefined);
+const [password, SetPassword] = useState(undefined);
 const [usertype, SetUser] = useState("Voter");
 const handleClick = () => setClick(!click);
 const closeMobileMenu = () => setClick(false);
@@ -29,10 +29,8 @@ checkUser()
                     National_id: {id}.id
                     ,Password: {password}.password
                 }
-                console.log(JSON.stringify(UserDetails))
                 const response1 = await axios.post('/login/voter', JSON.stringify(UserDetails), {headers:{'Content-type':'application/json'}})
                 localStorage.setItem('token', response1.data.token)
-                console.log(response1)
                 history.push('/voter')
                 //const response = await axios.get()
             }
@@ -41,10 +39,8 @@ checkUser()
                     Admin_id: {id}.id
                     ,Password: {password}.password
                 }
-                console.log(JSON.stringify(UserDetails))
                 const response1 = await axios.post('/login/admin', JSON.stringify(UserDetails), {headers:{'Content-type':'application/json'},})
                 localStorage.setItem('token', response1.data.token)
-                console.log(response1)
                 //return <Redirect to="/admin" />
                 history.push('/admin')
                 //const response = await axios.get('/admin', {headers:{'Content-type':'application/json',  'Authorization': `Bearer ${jwtoken}`}})//
@@ -53,6 +49,7 @@ checkUser()
         }
         catch(e){
             console.log(e)
+            alert("Invalid login details")
         }
         
     }

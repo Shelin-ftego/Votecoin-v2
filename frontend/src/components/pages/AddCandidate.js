@@ -108,6 +108,9 @@ class AddCandidate extends Component{
     }
 
   render(){
+    if (!this.state.web3) {
+      return <div>Loading Web3, accounts, and contract...</div>;
+    }    
     return(
       <div> 
       <NavbarA/>

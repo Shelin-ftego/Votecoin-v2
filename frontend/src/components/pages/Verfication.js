@@ -32,9 +32,8 @@ class Verfication extends Component{
         deployedNetwork && deployedNetwork.address,
       );
 
-      console.log(networkId);
+      // print contract address
       console.log(deployedNetwork.address);
-      console.log(ElectionContract.abi);
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -73,11 +72,9 @@ class Verfication extends Component{
 
   verify = async () => {
     const { accounts, contract } = this.state;
-    // const response = await contract.methods.verifyVote(this.state.ethAddress).call();
-    await contract.methods.verifyVote(this.state.ethAddress).call();
+    const response = await contract.methods.verifyVote(this.state.ethAddress).call(); // 0x85202974e05487Fc01EC59d54D312A5d36BbD209
     console.log(this.state.ethAddress);
-    // this.setState({candidateVoted: response});
-    // 0x85202974e05487Fc01EC59d54D312A5d36BbD209
+    this.setState({candidateVoted: response});
   };
 
     render(){
@@ -117,4 +114,3 @@ class Verfication extends Component{
 }
 
 export default Verfication
-

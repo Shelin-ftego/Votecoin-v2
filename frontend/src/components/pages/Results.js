@@ -1,5 +1,5 @@
 import { Divider } from "@material-ui/core";
-import React, { useEffect, useState, Component } from "react";
+import React, { Component } from "react";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -66,9 +66,8 @@ class Results extends Component{
         deployedNetwork && deployedNetwork.address,
       );
 
-      console.log(networkId);
-      console.log(deployedNetwork.address);
-      console.log(ElectionContract.abi);
+    // print contract address
+    console.log(deployedNetwork.address);
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.

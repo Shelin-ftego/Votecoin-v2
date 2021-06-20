@@ -58,9 +58,8 @@ class Candidate_view extends Component{
         deployedNetwork && deployedNetwork.address,
       );
 
-      console.log(networkId);
+      // print contract address
       console.log(deployedNetwork.address);
-      console.log(ElectionContract.abi);
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -143,5 +142,3 @@ Vote = async(idx)=>{
 }
 
 export default Candidate_view
-
-

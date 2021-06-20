@@ -1,5 +1,4 @@
-  
-import React, {useState, useEffect, Component} from 'react';
+  import React, {Component} from 'react';
 import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import '../../App.css';
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
@@ -40,9 +39,9 @@ class AddCandidate extends Component{
         deployedNetwork && deployedNetwork.address,
       );
 
-      console.log(networkId);
+      // print contract address
       console.log(deployedNetwork.address);
-      console.log(ElectionContract.abi);
+
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -60,8 +59,6 @@ class AddCandidate extends Component{
   fetchStatus = async () => {
     const { accounts, contract } = this.state;
 
-    console.log(accounts[0]);
-
     // check the election status on smart contract
     const response = await contract.methods.isVotingOpen().call();
 
@@ -75,7 +72,7 @@ class AddCandidate extends Component{
     }    
   };
 
-  // add candidate onto blockchain function
+  // add candidate onto blockchain
   runExample = async () => {
     try{
       if(this.state.party==undefined || this.state.c_image==null){
@@ -88,16 +85,6 @@ class AddCandidate extends Component{
     catch(e){
       console.log(e)
     }
-
-    // index to get the last candidate in array
-    // var index = await contract.methods.getNumofCandidates().call();
-    // console.log(index);
-
-    // getCandidate is a method which returns 3 values, by default these get stored in an array
-    // var response = await contract.methods.getCandidate((index-1)).call();
-    // console.log(response[0]);
-    // console.log(response[1]);
-    // console.log(response[2]);
   };
 
    handleSubmit = (event) => {
@@ -152,9 +139,9 @@ class AddCandidate extends Component{
   render(){
     
     // if web3 is not connected, this page is displayed
-    //if (!this.state.web3) {
-    //  return <div>Loading Web3, accounts, and contract...</div>;
-    //}
+    if (!this.state.web3) {
+     return <div>Loading Web3, accounts, and contract...</div>;
+    }
             
     return(
       <div style={{
@@ -196,10 +183,4 @@ class AddCandidate extends Component{
     </div>)
   }
 }
-export default AddCandidate
-
-
-
-
-
-  
+export default AddCandidate 

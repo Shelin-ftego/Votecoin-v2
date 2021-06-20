@@ -32,10 +32,9 @@ class ElectionS extends Component{
             ElectionContract.abi,
             deployedNetwork && deployedNetwork.address,
           );
-    
-          console.log(networkId);
+
+          // print contract address
           console.log(deployedNetwork.address);
-          console.log(ElectionContract.abi);
           
           // Set web3, accounts, and contract to the state, and then proceed with an
           // example of interacting with the contract's methods.
@@ -140,5 +139,3 @@ class ElectionS extends Component{
 }
 
 export default ElectionS
-
-

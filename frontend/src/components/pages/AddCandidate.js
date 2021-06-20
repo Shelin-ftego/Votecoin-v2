@@ -67,8 +67,10 @@ class AddCandidate extends Component{
     // update state with status of election
     if (response === true){
         this.setState({ status: true });
+        console.log('open')
     }else{
         this.setState({ status: false });
+        console.log('closed')
     }    
   };
 

@@ -92,8 +92,10 @@ class Results extends Component{
       // update state with status of election
       if (response === true){
           this.setState({ status: true });
+          console.log('open');
       }else{
           this.setState({ status: false });
+          console.log('closed');
       }    
     };
 
@@ -108,8 +110,10 @@ class Results extends Component{
       // update state with status of election
       if (response0 === true){
         this.setState({ status: true });
+        console.log('open');
       }else{
         this.setState({ status: false });
+        console.log('closed');
       } 
   
       const totalVotes = await contract.methods.totalVotes().call(); // get total votes

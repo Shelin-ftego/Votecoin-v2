@@ -59,8 +59,10 @@ class ElectionS extends Component{
         // update state with status of election
         if (response === true){
             this.setState({ status: "OPEN" });
+            console.log('open');
         }else{
             this.setState({ status: "CLOSED" });
+            console.log('closed');
         }    
       };
 

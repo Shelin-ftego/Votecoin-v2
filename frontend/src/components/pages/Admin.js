@@ -1,5 +1,5 @@
-import React from 'react'
-import NavbarA from '../NavbarA'
+import React from 'react';
+import NavbarA from '../NavbarA';
 import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/FaceOutlined';
@@ -10,7 +10,7 @@ function Admin() {
     const avatarStyle={backgroundColor:'#1bbd7e'};
     const btnstyle={margin:'8px 0'};
     return (
-        <div >
+        <div styles={{ backgroundImage:`url(${'../bg.png'})` }}>
             <NavbarA/>
             <Grid>
                 <Paper elevation={10} style={paperStyle}>

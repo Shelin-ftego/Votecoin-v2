@@ -9,7 +9,7 @@ export default function About() {
     color:'blue'
   };
 
-  return (<div>
+  return (<div >
    <Navbar/>
   <h1 className='about' style={aboutstyle}> ABOUT </h1>
   {/* <Footer/> */}

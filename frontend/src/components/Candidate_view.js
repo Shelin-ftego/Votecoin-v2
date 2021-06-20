@@ -81,6 +81,9 @@ class Candidate_view extends Component{
 
 Vote = async(idx)=>{
   try{
+    if(!window.confirm("Confirm this vote \n (Submitted votes cannot be changed)")){
+      throw new Error("Vote rejected")
+    }
     const token = localStorage.getItem('token')
     const config ={
       headers:{
@@ -97,7 +100,7 @@ Vote = async(idx)=>{
     
   }
   catch(e){
-
+    alert("Vote was not processed")
   }
 }
 

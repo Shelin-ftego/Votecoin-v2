@@ -103,8 +103,9 @@ contract Election{
         return (candidates[_candidateIndex].id, candidates[_candidateIndex].name, candidates[_candidateIndex].votesReceived);
     }
     
-    function verifyVote(address _voter) public view returns (uint){ // verify users vote
-        return voters[_voter].vote; // returns candidate index of who user voted for
+    function verifyVote(address _voter) public view returns (string memory){ // verify's users vote
+        uint id = voters[_voter].vote;
+        return candidates[id].name;
     }
 }
 

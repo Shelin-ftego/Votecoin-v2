@@ -72,15 +72,6 @@ class AddCandidate extends Component{
     }    
   };
 
-   handleSubmit = (event) => {
-    //  event.preventDefault();
-     if(!this.state.status){ // if election is closed
-      this.runExample()
-      this.submitCandidate()
-      console.log('added on database')
-     }
-    };
-
   // add candidate onto blockchain
   runExample = async () => {
     try{
@@ -137,6 +128,15 @@ class AddCandidate extends Component{
         alert("Candidate could not be added")
       }
     }
+
+    handleSubmit = (event) => {
+      //  event.preventDefault();
+       if(!this.state.status){ // if election is closed
+        this.runExample()
+        this.submitCandidate()
+        console.log('added on database')
+       }
+      };
 
   render(){
     

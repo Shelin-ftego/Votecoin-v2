@@ -64,18 +64,19 @@ class Verfication extends Component{
     }    
   };  
 
+  verify = async () => {
+    // 0x85202974e05487Fc01EC59d54D312A5d36BbD209
+    const { accounts, contract } = this.state;
+    const response = await contract.methods.verifyVote(this.state.ethAddress).call(); 
+    console.log('verified');
+    this.setState({candidateVoted: response});
+  };
+
   handleSubmit = (event) => {
     if (!this.state.status){ // if election is closed
       this.verify();
     }
-  };
-
-  verify = async () => {
-    const { accounts, contract } = this.state;
-    const response = await contract.methods.verifyVote(this.state.ethAddress).call(); // 0x85202974e05487Fc01EC59d54D312A5d36BbD209
-    console.log(this.state.ethAddress);
-    this.setState({candidateVoted: response});
-  };
+  };  
 
     render(){
 

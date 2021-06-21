@@ -35,12 +35,12 @@ const paperStyle={padding :20,height:'60vh',width:600, margin:"20px auto"};
 const avatarStyle={backgroundColor:'#1bbd7e'};
 const btnstyle={margin:'8px 0'};
 
-//web3 can be called in the vote function; the candidate index is 'idx'
 
 class Candidate_view extends Component{
 
-    // states + web3 states
-    state = { party: undefined, image:undefined, web3: null, accounts: null, contract: null, status: null };
+  // states + web3 states
+  state = { party: undefined, image:undefined, web3: null, accounts: null, contract: null, status: null };
+
   // web3 initialization
   componentDidMount = async () => {
     try {
@@ -107,7 +107,7 @@ Vote = async(idx)=>{
       const response = await axios.patch('/voter/vote',{}, config)
       console.log("voted for "+idx)
   
-      // call function from smart contract to vote
+      // call "vote" function from smart contract
       const { accounts, contract } = this.state;
       await contract.methods.vote(idx).send({ from: accounts[0] });
       console.log('voted on blockchain')

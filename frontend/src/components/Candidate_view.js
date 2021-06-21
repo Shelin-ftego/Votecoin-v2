@@ -63,7 +63,7 @@ class Candidate_view extends Component{
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, accounts, contract: instance }, this.fetchStatus);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -90,13 +90,18 @@ class Candidate_view extends Component{
       }    
     };
 
-
 Vote = async(idx)=>{
   if (this.state.status){ // if election is open
     try{
       if(!window.confirm("Confirm this vote \n (Submitted votes cannot be changed)")){
         throw new Error("Vote rejected")
       }
+
+      // call "vote" function from smart contract
+      const { accounts, contract } = this.state;
+      await contract.methods.vote(idx).send({ from: accounts[0] });
+      console.log('voted on blockchain')
+
       const token = localStorage.getItem('token')
       const config ={
         headers:{
@@ -106,12 +111,6 @@ Vote = async(idx)=>{
       }
       const response = await axios.patch('/voter/vote',{}, config)
       console.log("voted for "+idx)
-  
-      // call "vote" function from smart contract
-      const { accounts, contract } = this.state;
-      await contract.methods.vote(idx).send({ from: accounts[0] });
-      console.log('voted on blockchain')
-      
     }
     catch(e){
       alert("Vote was not processed")

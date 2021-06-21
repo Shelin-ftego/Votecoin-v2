@@ -73,9 +73,7 @@ class Verfication extends Component{
   };
 
   handleSubmit = (event) => {
-    if (!this.state.status){ // if election is closed
       this.verify();
-    }
   };  
 
     render(){

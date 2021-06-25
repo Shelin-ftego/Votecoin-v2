@@ -26,25 +26,25 @@ function Voter() {
                     </Grid>
                     <h1 align='center'> 
                     <Link to='/Vcard' >
-                            -Vote   
+                    🔵Vote   
                     </Link> 
                     </h1>     
             <br/>
             <h1 align='center'> 
                     <Link to='/verify' >
-                    -Verify Your Vote   
+                    🔵Verify Your Vote   
                     </Link> 
                     </h1>  
               <br/>
               <h1 align='center'> 
                     <Link to='/results' >
-                    -View Results  
+                    🔵View Results  
                     </Link> 
                     </h1>  
                     <br/>
               <h1 align='center'> 
                     <Link to='/upload' >
-                    -Upload Required Documents  
+                    🔵Upload Required Documents  
                     </Link> 
                     </h1>  
             <br/>

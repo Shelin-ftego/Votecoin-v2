@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-const paperStyle={padding :20,height:'60vh',width:600, margin:"20px auto"};
+const paperStyle={padding :20,height:'40vh',width:300, margin:"20px auto"};
 const avatarStyle={backgroundColor:'#1bbd7e'};
 const btnstyle={margin:'8px 0'};
 
@@ -59,7 +59,7 @@ class Candidate_view extends Component{
       );
 
       // print contract address
-      console.log(deployedNetwork.address);
+      console.log('contract address: ', deployedNetwork.address);
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -75,7 +75,7 @@ class Candidate_view extends Component{
 
     // fetch election status
     fetchStatus = async () => {
-      const { accounts, contract } = this.state;
+      const { contract } = this.state;
   
       // check the election status on smart contract
       const response = await contract.methods.isVotingOpen().call();
@@ -83,10 +83,10 @@ class Candidate_view extends Component{
       // update state with status of election
       if (response === true){
           this.setState({ status: true });
-          console.log('open');
+          console.log('election: open');
       }else{
           this.setState({ status: false });
-          console.log('closed');
+          console.log('election: closed');
       }    
     };
 
@@ -125,11 +125,10 @@ Vote = async(idx)=>{
        <Paper elevation={10} style={paperStyle}>
        <Grid align='center'>
         <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-        <h1>Vote Candidate</h1>
+        <h1>Candidate: {this.props.PartyName}</h1>
     </Grid>
           <Grid align='center'>
           <div>
-            <MDBCardTitle>Candidate: {this.props.PartyName}</MDBCardTitle>
             <img src={`http://localhost:4000/voter/candidate/${this.props.PartyName}/image`}></img>
           </div>
             <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.Vote.bind(this,  this.props.Cand_index)}>Vote</Button>

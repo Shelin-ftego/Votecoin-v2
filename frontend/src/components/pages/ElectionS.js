@@ -34,7 +34,7 @@ class ElectionS extends Component{
           );
 
           // print contract address
-          console.log(deployedNetwork.address);
+          console.log('contract address: ', deployedNetwork.address);
           
           // Set web3, accounts, and contract to the state, and then proceed with an
           // example of interacting with the contract's methods.
@@ -48,22 +48,22 @@ class ElectionS extends Component{
         }
       };
     
-      // fetch election status
-      fetchStatus = async () => {
-        const { accounts, contract } = this.state;
-    
-        // check the election status on smart contract
-        const response = await contract.methods.isVotingOpen().call();
+  // fetch election status
+  fetchStatus = async () => {
+    const { contract } = this.state;
 
-        // update state with status of election
-        if (response === true){
-            this.setState({ status: "OPEN" });
-            console.log('open');
-        }else{
-            this.setState({ status: "CLOSED" });
-            console.log('closed');
-        }    
-      };
+    // check the election status on smart contract
+    const response = await contract.methods.isVotingOpen().call();
+
+    // update state with status of election
+    if (response === true){
+        this.setState({ status: "OPEN" });
+        console.log('election: open');
+    }else{
+        this.setState({ status: "CLOSED" });
+        console.log('election: closed');
+    }    
+  };  
 
       // starts election on smart contract
       start = async () => {
@@ -79,12 +79,12 @@ class ElectionS extends Component{
 
     handleStartSubmit = event => {
         this.start() // call start function
-        console.log("start")
+        console.log("start election")
         };
 
     handleStopSubmit = event => {
         this.stop() // call stop function
-        console.log("stop")
+        console.log("stop election")
         };
 
     render(){   
@@ -100,6 +100,7 @@ class ElectionS extends Component{
             "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
         }}>
             <NavbarA/>
+            <div align='center'>Election Status: {this.state.status}</div>
             <Grid>
             <Paper elevation={10} style={paperStyle}>
             <Grid align='center'>
@@ -115,7 +116,7 @@ class ElectionS extends Component{
         </Grid>
         <br/>
         <Typography align='center'> 
-             Providing the admin with the ability to stop and start the voting period
+             Admin may START and STOP the Voting Period
                     </Typography>
          <br/>        
             </Paper>

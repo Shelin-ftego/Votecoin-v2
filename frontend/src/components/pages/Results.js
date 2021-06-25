@@ -9,8 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import NavbarV from '../NavbarV';
-//import axios from "axios";
-//import { HorizontalBar } from "@reactchartjs/react-chart.js";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // web3 imports
 import ElectionContract from "../../contracts/Election.json";
@@ -67,11 +66,11 @@ class Results extends Component{
       );
 
     // print contract address
-    console.log(deployedNetwork.address);
+    console.log('contract address: ', deployedNetwork.address);
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.fetchStatus, this.fetchResults);
+      this.setState({ web3, accounts, contract: instance }, this.fetchResults);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -81,41 +80,26 @@ class Results extends Component{
     }
   };
 
-    // fetch election status
-    fetchStatus = async () => {
-      const { accounts, contract } = this.state;
-  
-      // check the election status on smart contract
-      const response = await contract.methods.isVotingOpen().call();
-  
-      // update state with status of election
-      if (response === true){
-          this.setState({ status: true });
-          console.log('open');
-      }else{
-          this.setState({ status: false });
-          console.log('closed');
-      }    
-    };
-
   // get results from blockchain
   fetchResults = async () => {
+
     if (!this.state.status){ // if election is closed
-      const { accounts, contract } = this.state;
+      const { contract } = this.state;
     
       // check the election status on smart contract
-      const response0 = await contract.methods.isVotingOpen().call();
+      const responseStatus = await contract.methods.isVotingOpen().call();
   
       // update state with status of election
-      if (response0 === true){
+      if (responseStatus === true){
         this.setState({ status: true });
-        console.log('open');
+        console.log('election: open');
       }else{
         this.setState({ status: false });
-        console.log('closed');
+        console.log('election: closed');
       } 
   
       const totalVotes = await contract.methods.totalVotes().call(); // get total votes
+      console.log('total votes: ' , totalVotes)
   
       // index to get the last candidate in array
       var index = (await contract.methods.getNumofCandidates().call()) - 1;
@@ -125,33 +109,20 @@ class Results extends Component{
         if (index>=0){
           const winnerObj = await contract.methods.getWinnerCandidate().call(); // first get winner candidate
           this.setState({ winner: winnerObj[1] });
-          console.log(this.state.winner);
+          console.log('winner:' , this.state.winner);
           
+
           for (var i=0; i<=index; i++){
-            const response = await contract.methods.getCandidate(i).call(); // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
-            // store response[1] into table // party name
-            // store response[2] into table // votes received
-            const votesPercent = response[2]/totalVotes * 100 // % of votes received
-            // rows[i] = this.createData(i, response[1], response[2], votesPercent);
+            const candidate = await contract.methods.getCandidate(i).call(); // getCandidate is a method which returns 3 values, by default these get stored in an array, so "response" is an array
+            // store candidate[1] into table // party name
+            // store candidate[2] into table // votes received
+            const votesPercent = candidate[2]/totalVotes * 100 // % of votes received
       }
         }
       }
       
     }
   }; 
-
-  createData(position, name, votes, percentvotes) {
-    return {position, name, votes,percentvotes };
-  }
-
-
-  rows = [
-    this.createData(1,'EFF', 900, 40.54),
-    this.createData(2,'DA', 500, 22.52),
-    this.createData(3,'IFP', 420, 18.92),
-    this.createData(4,'ANC', 300, 13.51),
-    this.createData(5,'MF', 100, 4.51),
-  ];
 
   render(){
     
@@ -171,56 +142,12 @@ class Results extends Component{
           "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
       }}>
           <NavbarV/>
+          <div align='center'>Election Status: {this.state.status}</div>
         <h1 align='center'>Results</h1>
-        <TableContainer component={Paper}>
-        <Table  aria-label="customized table">
-          <TableHead>
-            <TableRow>
-            <StyledTableCell>Position:</StyledTableCell>
-              <StyledTableCell align="right">Party Name:</StyledTableCell>
-              <StyledTableCell align="right">Number of Votes:</StyledTableCell>
-              <StyledTableCell align="right">Percentage of Votes:</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.rows.map((row) => (
-              <StyledTableRow key={row.position}>
-                <StyledTableCell component="th" scope="row">
-                  {row.position}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.name}</StyledTableCell>
-                <StyledTableCell align="right">{row.votes}</StyledTableCell>
-                <StyledTableCell align="right">{row.percentvotes}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <br/>
       <h1 align='center'>WINNER: {this.state.winner}</h1>
-      <br/>
-      {' '}
-      <br/>
-      {' '}
-      <br/>
-      {' '}
-      <br/>
-      {' '}
-      <br/>
-      {' '}
-      <br/>
-      {' '}
-      <br/>
-      {' '}
-      <br/>
-      {' '}
-      <br/>
-      {' '}
-      <br/>
       </div>
   )
 }
 };
 
 export default Results;
- // HorizontalBar data={data} options={options}

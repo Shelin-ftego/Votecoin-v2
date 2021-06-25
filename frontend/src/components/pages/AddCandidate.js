@@ -1,4 +1,4 @@
-  import React, {Component} from 'react';
+import React, {Component} from 'react';
 import {Switch, Link, Redirect, useHistory} from 'react-router-dom';
 import '../../App.css';
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
@@ -57,7 +57,7 @@ class AddCandidate extends Component{
 
   // fetch election status
   fetchStatus = async () => {
-    const { accounts, contract } = this.state;
+    const { contract } = this.state;
 
     // check the election status on smart contract
     const response = await contract.methods.isVotingOpen().call();
@@ -65,10 +65,10 @@ class AddCandidate extends Component{
     // update state with status of election
     if (response === true){
         this.setState({ status: true });
-        console.log('open')
+        console.log('election: open')
     }else{
         this.setState({ status: false });
-        console.log('closed')
+        console.log('election: closed')
     }    
   };
 
@@ -151,6 +151,7 @@ class AddCandidate extends Component{
           "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
       }}> 
       <NavbarA/>
+      <div align='center'>Election Status: {this.state.status}</div>
       <form onSubmit={this.handleSubmit}>
       <Grid> 
         <h1 align='center'>Add Candidate</h1>

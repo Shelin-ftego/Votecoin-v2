@@ -33,7 +33,7 @@ class Verfication extends Component{
       );
 
       // print contract address
-      console.log(deployedNetwork.address);
+      console.log('contract address: ', deployedNetwork.address);
       
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -57,18 +57,17 @@ class Verfication extends Component{
     // update state with status of election
     if (response === true){
         this.setState({ status: true });
-        console.log('open');
+        console.log('election: open');
     }else{
         this.setState({ status: false });
-        console.log('closed');
+        console.log('election: closed');
     }    
   };  
 
   verify = async () => {
-    // 0x85202974e05487Fc01EC59d54D312A5d36BbD209
-    const { accounts, contract } = this.state;
+    const { contract } = this.state;
     const response = await contract.methods.verifyVote(this.state.ethAddress).call(); 
-    console.log('verified');
+    console.log(response);
     this.setState({candidateVoted: response});
   };
 
@@ -89,6 +88,7 @@ class Verfication extends Component{
             "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
         }}>
             <NavbarV/>
+            <div align='center'>Election Status: {this.state.status}</div>
             
             <Grid>
             <Paper elevation={10} style={paperStyle}>
@@ -102,12 +102,13 @@ class Verfication extends Component{
             <br/>
             <Button style={btnstyle} type='submit' color='primary' variant="contained" onClick={this.handleSubmit} >Check Voter Address</Button>
             <br/>
-            <TextField label='Candidate Voted' placeholder='Candidate Voted'>{this.state.candidateVoted}</TextField>
+            <div> Candidate Voted: {this.state.candidateVoted} </div>
             <br/>
             </Grid>
             </Paper>
             </Grid>
         </div>
+        
     )
     }
 }

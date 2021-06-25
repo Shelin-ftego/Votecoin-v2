@@ -12,12 +12,6 @@ import NavbarV from '../NavbarV';
 //Change from constant to web3 command, uses candidate view. 
 
  function Vcard () {
-  // const [loading, setLoading] = useState(false);
-  // const [voteForA, setVoteForA] = useState(0);
-  // const [voteForB, setVoteForB] = useState(0);
-  // const [voted, setVoted] = useState(false);
-  // const [open, setOpen] = useState(false);
-  // const [openVoted, setOpenVoted] = useState(false);
   const [candidates,setCandidates] = useState([
     {Political_party:'Default'}
   ])

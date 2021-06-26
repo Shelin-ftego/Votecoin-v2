@@ -20,7 +20,7 @@ const btnstyle={margin:'8px 0'}
 
 class AddCandidate extends Component{
   // states + web3 states
-  state = { party: undefined, c_image:null , web3: null, accounts: null, contract: null, status: null };
+  state = { party: undefined, c_image:null , web3: null, accounts: null, contract: null, status: null, statusDisplay: null };
 
   // web3 initialization
   componentDidMount = async () => {
@@ -65,15 +65,17 @@ class AddCandidate extends Component{
     // update state with status of election
     if (response === true){
         this.setState({ status: true });
+        this.setState({ statusDisplay: "OPEN" });
         console.log('election: open')
     }else{
         this.setState({ status: false });
+        this.setState({ statusDisplay: "CLOSED" });
         console.log('election: closed')
     }    
   };
 
   // add candidate onto blockchain
-  runExample = async () => {
+  submitCandidate_blk = async () => {
     try{
       if(this.state.party==undefined || this.state.c_image==null){
         throw new Error("Candidate details are not complete")
@@ -84,6 +86,7 @@ class AddCandidate extends Component{
     }
     catch(e){
       console.log(e)
+      alert("Blockchain: Candidate could not be added")
     }
   };
 
@@ -122,19 +125,19 @@ class AddCandidate extends Component{
           throw new Error("Rejected candidate")
         }
           //need to do a page transition
+          console.log('added on database')
       }
       catch(e){
         console.log(e)
-        alert("Candidate could not be added")
+        alert("Database: Candidate could not be added")
       }
     }
 
     handleSubmit = (event) => {
       //  event.preventDefault();
        if(!this.state.status){ // if election is closed
-        this.runExample()
-        this.submitCandidate()
-        console.log('added on database')
+        this.submitCandidate_blk(); // submit candidate on the blockchain
+        this.submitCandidate(); // submit candidate on the database
        }
       };
 
@@ -151,7 +154,7 @@ class AddCandidate extends Component{
           "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
       }}> 
       <NavbarA/>
-      <div align='center'>Election Status: {this.state.status}</div>
+      <div align='center'>Election Status: {this.state.statusDisplay}</div>
       <form onSubmit={this.handleSubmit}>
       <Grid> 
         <h1 align='center'>Add Candidate</h1>
@@ -161,11 +164,11 @@ class AddCandidate extends Component{
         <h2>Political Party</h2>
     </Grid>
      <Grid>
-     <TextField label='Party Name' placeholder='Please enter Party Name' onChange={(e) =>  this.setState({party:e.target.value})}/>
+     <TextField label='Party Name' placeholder='Please Enter Party Name' onChange={(e) =>  this.setState({party:e.target.value})}/>
              <br/>
      </Grid>
             <br/>
-    <Grid>            <label>Select Image to Upload: </label>
+    <Grid>            <label>Select Image To Upload: </label>
                <input type='file' id='image' onChange={(e)=> this.setState({c_image:e.target.files[0]}) }/>
                <br/>
                </Grid>

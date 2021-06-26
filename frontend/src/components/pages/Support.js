@@ -77,7 +77,7 @@ export default function Support() {
               className='social-icon-link youtube'
               to='/'
               target='_blank'
-              aria-label='Youtube'
+              aria-label='YouTube'
             >
               <i className='fab fa-youtube' />
             </Link>
@@ -102,7 +102,7 @@ export default function Support() {
   </Paper>
   <Paper elevation={10} style={paperStyle1}>
    <h1 align='center' >REACH US @</h1>
-   <h2 align='center' >Address: Mazisi Kunene Road, Glenwood Durban University of KZN Durban 4041</h2>
+   <h2 align='center' >Address: 238 Mazisi Kunene Road, Glenwood Durban University of KZN Durban 4041</h2>
    <h2 align='center' >Phone: 031 260 1111</h2>
    <h2 align='center' >Email: enquiries@ukzn.ac.za</h2>
   </Paper>

@@ -14,7 +14,7 @@ const btnstyle={margin:'15px 0',font: '20px',padding: '10px 60px',border: '20px'
 class ElectionS extends Component{
 
     // states + web3 states
-    state = { web3: null, accounts: null, contract: null, status: null };
+    state = { web3: null, accounts: null, contract: null, status: null, statusDisplay: null };
 
     // web3 initialization
     componentDidMount = async () => {
@@ -57,10 +57,12 @@ class ElectionS extends Component{
 
     // update state with status of election
     if (response === true){
-        this.setState({ status: "OPEN" });
+        this.setState({ status: true });
+        this.setState({ statusDisplay: "OPEN" });
         console.log('election: open');
     }else{
-        this.setState({ status: "CLOSED" });
+        this.setState({ status: false });
+        this.setState({ statusDisplay: "CLOSED" });
         console.log('election: closed');
     }    
   };  
@@ -100,12 +102,12 @@ class ElectionS extends Component{
             "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
         }}>
             <NavbarA/>
-            <div align='center'>Election Status: {this.state.status}</div>
+            <div align='center'>Election Status: {this.state.statusDisplay}</div>
             <Grid>
             <Paper elevation={10} style={paperStyle}>
             <Grid align='center'>
                         <Avatar style={avatarStyle}><ThumbUpIcon/></Avatar>
-                        <h1 align='center'>VOTING STATUS: {this.state.status}</h1>
+                        <h1 align='center'>VOTING STATUS: {this.state.statusDisplay}</h1>
             </Grid>
         <Grid align='center'>
         <Button align='left' type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.handleStartSubmit}>Start Voting Period</Button>
@@ -116,7 +118,7 @@ class ElectionS extends Component{
         </Grid>
         <br/>
         <Typography align='center'> 
-             Admin may START and STOP the Voting Period
+             Admin may START or STOP the Voting Period
                     </Typography>
          <br/>        
             </Paper>

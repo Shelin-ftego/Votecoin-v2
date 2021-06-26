@@ -48,7 +48,7 @@ function Blockchain() {
            <Grid>
            <Paper elevation={10} style={paperStyle}>
           <Grid align='center'>
-          <h1>REGISTER VOTERS: </h1>
+          <h1>Authenticated Voters </h1>
           </Grid>
             {
                 users.map((user) => <Voterroll_view ID={user.National_id} Name={user.Name} Surname={user.Surname}  

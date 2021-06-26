@@ -11,9 +11,9 @@ const paperStyle={padding :20,height:'90vh',width:800, margin:"20px auto"}
 const avatarStyle={backgroundColor:'#1bbd7e'}
 const btnstyle={margin:'8px 0'}
 
-class Verfication extends Component{
+class Verification extends Component{
     // states + web3 states
-    state = { ethAddress: undefined, candidateVoted:undefined, web3: null, accounts: null, contract: null, status: null}
+    state = { ethAddress: undefined, candidateVoted:undefined, web3: null, accounts: null, contract: null, status: null, statusDisplay: null}
 
   // web3 initialization
   componentDidMount = async () => {
@@ -49,7 +49,7 @@ class Verfication extends Component{
 
   // fetch election status
   fetchStatus = async () => {
-    const { accounts, contract } = this.state;
+    const { contract } = this.state;
 
     // check the election status on smart contract
     const response = await contract.methods.isVotingOpen().call();
@@ -57,18 +57,21 @@ class Verfication extends Component{
     // update state with status of election
     if (response === true){
         this.setState({ status: true });
+        this.setState({ statusDisplay: "OPEN" });
         console.log('election: open');
     }else{
         this.setState({ status: false });
+        this.setState({ statusDisplay: "CLOSED" });
         console.log('election: closed');
     }    
   };  
 
+  // verify a vote
   verify = async () => {
     const { contract } = this.state;
-    const response = await contract.methods.verifyVote(this.state.ethAddress).call(); 
-    console.log(response);
-    this.setState({candidateVoted: response});
+    const cVoted = await contract.methods.verifyVote(this.state.ethAddress).call(); 
+    console.log('candidate voted: ', cVoted);
+    this.setState({candidateVoted: cVoted});
   };
 
   handleSubmit = (event) => {
@@ -88,7 +91,7 @@ class Verfication extends Component{
             "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
         }}>
             <NavbarV/>
-            <div align='center'>Election Status: {this.state.status}</div>
+            <div align='center'>Election Status: {this.state.statusDisplay}</div>
             
             <Grid>
             <Paper elevation={10} style={paperStyle}>
@@ -102,6 +105,7 @@ class Verfication extends Component{
             <br/>
             <Button style={btnstyle} type='submit' color='primary' variant="contained" onClick={this.handleSubmit} >Check Voter Address</Button>
             <br/>
+            <br/>
             <div> Candidate Voted: {this.state.candidateVoted} </div>
             <br/>
             </Grid>
@@ -113,4 +117,4 @@ class Verfication extends Component{
     }
 }
 
-export default Verfication
+export default Verification;

@@ -9,7 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import NavbarV from '../NavbarV';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 // web3 imports
 import ElectionContract from "../../contracts/Election.json";
@@ -46,7 +45,7 @@ const useStyles = makeStyles({
 class Results extends Component{
 
   // states + web3 states
-  state = { winner: undefined, status: undefined, results: undefined, web3: null, accounts: null, contract: null, status: null };
+  state = { winner: undefined, status: undefined, results: undefined, web3: null, accounts: null, contract: null, status: null, statusDisplay: null };
 
   // web3 initialization
   componentDidMount = async () => {
@@ -92,9 +91,11 @@ class Results extends Component{
       // update state with status of election
       if (responseStatus === true){
         this.setState({ status: true });
+        this.setState({statusDisplay: "OPEN"});
         console.log('election: open');
       }else{
         this.setState({ status: false });
+        this.setState({statusDisplay: "CLOSED"});
         console.log('election: closed');
       } 
   
@@ -142,7 +143,7 @@ class Results extends Component{
           "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
       }}>
           <NavbarV/>
-          <div align='center'>Election Status: {this.state.status}</div>
+          <div align='center'>Election Status: {this.state.statusDisplay}</div>
         <h1 align='center'>Results</h1>
       <h1 align='center'>WINNER: {this.state.winner}</h1>
       </div>

@@ -8,7 +8,7 @@ import Support from './components/pages/Support';
 import Login from './components/pages/Login'
 import Admin from './components/pages/Admin';
 import Voter from './components/pages/Voter';
-import Verfication from './components/pages/Verfication';
+import Verification from './components/pages/Verification';
 import Results from './components/pages/Results';
 import Vcard from './components/pages/Vcard';
 import Candidates from './components/pages/AddCandidate';
@@ -30,7 +30,7 @@ function App() {
         <Route path='/login' component={Login} />
         <Route path='/admin' component={Admin} />
         <Route path='/voter' component={Voter} />
-        <Route path='/verify' component={Verfication} />
+        <Route path='/verify' component={Verification} />
         <Route path='/results' component={Results} />
         <Route path='/vcard' component={Vcard} />
         <Route path='/add-candidate' component={Candidates} />

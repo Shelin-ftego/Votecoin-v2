@@ -44,9 +44,6 @@ function NavbarV() {
       }
     }
 
-
-
-
     window.addEventListener('resize', showButton);
     return (
         <>

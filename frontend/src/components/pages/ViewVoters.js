@@ -41,14 +41,14 @@ function Blockchain() {
     return (
         <div style={{
           backgroundImage:
-            "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
+            "url(" + require("./images/bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
         }}>
             <main>
             <NavbarA/>
            <Grid>
            <Paper elevation={10} style={paperStyle}>
           <Grid align='center'>
-          <h1>Authenticated Voters </h1>
+          <h1 align='center'>Authenticated Voters </h1>
           </Grid>
             {
                 users.map((user) => <Voterroll_view ID={user.National_id} Name={user.Name} Surname={user.Surname}  

@@ -88,7 +88,7 @@ class Verification extends Component{
     return (
         <div style={{
           backgroundImage:
-            "url(" + require("./bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
+            "url(" + require("./images/bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
         }}>
             <NavbarV/>
             <div align='center'>Election Status: {this.state.statusDisplay}</div>

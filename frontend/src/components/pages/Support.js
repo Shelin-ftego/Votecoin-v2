@@ -19,7 +19,7 @@ export default function Support() {
 
   return (<div style={{
     backgroundImage:
-      "url(" + require("./vote.png").default + ")",
+      "url(" + require("./images/vote.png").default + ")",
   }}>
   <Navbar/>
   <Paper elevation={10} style={paperStyle}>

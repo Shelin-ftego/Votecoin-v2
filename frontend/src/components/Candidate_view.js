@@ -91,6 +91,12 @@ class Candidate_view extends Component{
     };
 
 Vote = async(idx)=>{
+  // test on console
+  const { contract } = this.state;
+  const test = await contract.methods.getCandidate(idx).call();
+  console.log('frontend: ', idx); // return candidate index
+  console.log('blockchain: ', test[1]); // return candidate name
+
   if (this.state.status){ // if election is open
     try{
       if(!window.confirm("Confirm this vote \n (Submitted votes cannot be changed)")){
@@ -109,12 +115,14 @@ Vote = async(idx)=>{
           "Authorization": "Bearer "+ token
         }
       }
-      const response = await axios.patch('/voter/vote',{}, config)
+      const response = await axios.patch('/voter/vote',{}, config) // "const response" can be deleted ????????????
       console.log("voted for "+idx)
     }
     catch(e){
       alert("Vote was not processed")
     }
+  }else{
+    alert("Voting Period Currently Closed");
   }
 }
 
@@ -125,7 +133,7 @@ Vote = async(idx)=>{
        <Paper elevation={10} style={paperStyle}>
        <Grid align='center'>
         <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-        <h1>Candidate: {this.props.PartyName}</h1>
+        <h1>Party: {this.props.PartyName}</h1>
     </Grid>
           <Grid align='center'>
           <div>

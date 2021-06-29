@@ -78,11 +78,11 @@ class AddCandidate extends Component{
       if(!this.state.status){ // election must be closed
         try{
 
-          if(this.state.party==undefined || this.state.c_image==null){
+          if(this.state.party==undefined || this.state.c_image==null){ // check if fields are filled
             throw new Error("Candidate details are not complete")
           }
   
-          if(!window.confirm("Are you sure you want to add this candidate?")){
+          if(!window.confirm("Are you sure you want to add this candidate?")){ // confirmation
             throw new Error("Cancelled candidate addition")
           }
 
@@ -90,40 +90,36 @@ class AddCandidate extends Component{
           const { accounts, contract } = this.state;
           await contract.methods.addCandidate(this.state.party).send({ from: accounts[0] });
           console.log('added on blockchain')
-        }
-        catch(e){
-          console.log(e)
-          alert("blockchain: candidate could not be added")
-        }
-        // add candidate on database
-        try{
+
+          // add candidate on database
           const newCandidate = {
-              Political_party : this.state.party
+            Political_party : this.state.party
+        }
+        const token = localStorage.getItem('token')
+        const config1 ={
+          headers:{
+            "Content-type": "application/json",
+            "Authorization": "Bearer "+ token
           }
-          const token = localStorage.getItem('token')
-          const config1 ={
-            headers:{
-              "Content-type": "application/json",
-              "Authorization": "Bearer "+ token
-            }
+        }
+        const config2 ={
+          headers:{
+            "Content-type": "multipart/form-data",
+            "Authorization": "Bearer "+ token
           }
-          const config2 ={
-            headers:{
-              "Content-type": "multipart/form-data",
-              "Authorization": "Bearer "+ token
-            }
-          }
-    
-          await axios.post('/admin/election-admin/candidate', JSON.stringify(newCandidate), config1)
-          const candidate_img = new FormData()
-          candidate_img.append('image', this.state.c_image, this.state.c_image.name)
-          await axios.post(`/admin/election-admin/${this.state.party}/image`, candidate_img, config2)
-            //need to do a page transition
-            console.log('added on database')
+        }
+  
+        await axios.post('/admin/election-admin/candidate', JSON.stringify(newCandidate), config1)
+        const candidate_img = new FormData()
+        candidate_img.append('image', this.state.c_image, this.state.c_image.name)
+        await axios.post(`/admin/election-admin/${this.state.party}/image`, candidate_img, config2)
+        //need to do a page transition
+        console.log('added on database')
+
         }
         catch(e){
           console.log(e)
-          alert("Database: Candidate could not be added")
+          alert('Candidate could not be added');
         }
       }else{
         alert("Voting Period Must Be Closed!");
@@ -148,7 +144,7 @@ class AddCandidate extends Component{
           "url(" + require("./images/bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
       }}> 
       <NavbarA/>
-      <div align='center'>Election Status: {this.state.statusDisplay}</div>
+      <div align='center'>VOTING PERIOD: {this.state.statusDisplay}</div>
       <form onSubmit={this.handleSubmit}>
       <Grid> 
         <h1 align='center'>Add Candidate</h1>

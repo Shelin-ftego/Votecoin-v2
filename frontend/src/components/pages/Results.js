@@ -143,9 +143,51 @@ class Results extends Component{
           "url(" + require("./images/bg.png").default + ")", backgroundRepeat:'no-repeat', backgroundSize:'100% 100%'
       }}>
           <NavbarV/>
-          <div align='center'>Election Status: {this.state.statusDisplay}</div>
+          <div align='center'>Voting Period: {this.state.statusDisplay}</div>
         <h1 align='center'>Results</h1>
-      <h1 align='center'>WINNER: {this.state.winner}</h1>
+      <h1 align='center'>WINNER: {this.state.winner}</h1>    
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}      
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>      
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
+      {' '}
+      <br/>
       </div>
   )
 }

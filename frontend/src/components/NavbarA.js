@@ -64,7 +64,7 @@ function NavbarA() {
                  <ul className= {click ? 'navA-menu active' : 'navA-menu'}>
                      <li className='navA-item'>
                          <Link to='/add-candidate' className='navA-links' onClick={closeMobileMenu}>
-                           Candidates    
+                           Candidates   
                          </Link> 
                      </li>
                      <li className='navA-item'>

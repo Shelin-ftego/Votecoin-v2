@@ -167,6 +167,12 @@ class AddCandidate extends Component{
         </Paper>
         </Grid>
       </form>
+      <h1 align='center'> 
+                    <Link to='/vcard-admin' >
+                    View Candidates
+                    </Link> 
+                    </h1>  
+                    <br/>
       {' '}
             <br/>
             {' '}

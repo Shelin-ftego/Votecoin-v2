@@ -11,6 +11,7 @@ import Voter from './components/pages/Voter';
 import Verification from './components/pages/Verification';
 import Results from './components/pages/Results';
 import Vcard from './components/pages/Vcard';
+import Vcard_admin from './components/pages/Vcard_admin';
 import Candidates from './components/pages/AddCandidate';
 import ElectionS from './components/pages/ElectionS';
 import Blockchain from './components/pages/Blockchain';
@@ -33,6 +34,7 @@ function App() {
         <Route path='/verify' component={Verification} />
         <Route path='/results' component={Results} />
         <Route path='/vcard' component={Vcard} />
+        <Route path='/vcard-admin' component={Vcard_admin} />
         <Route path='/add-candidate' component={Candidates} />
         <Route path='/electionstatus' component={ElectionS} />
         <Route path='/blockchain' component={Blockchain} />

@@ -31,11 +31,10 @@ const useStyles = makeStyles({
   },
 });
 
-const paperStyle={padding :20,height:'40vh',width:200, margin:"20px auto"};
+const paperStyle={padding :20,height:'37vh',width:200, margin:"20px auto"};
 const btnstyle={margin:'8px 0'};
 
-
-class Candidate_view extends Component{
+class Candidate_view_admin extends Component{
 
   // states + web3 states
   state = { party: undefined, image:undefined, web3: null, accounts: null, contract: null, status: null };
@@ -89,43 +88,6 @@ class Candidate_view extends Component{
       }    
     };
 
-    // function to vote
-Vote = async(idx)=>{
-  // test on console
-  const { contract } = this.state;
-  const test = await contract.methods.getCandidate(idx).call();
-  console.log('frontend: ', idx); // return candidate index
-  console.log('blockchain: ', test[1]); // return candidate name
-
-  if (this.state.status){ // if election is open
-    try{
-      if(!window.confirm("Confirm this vote \n (Submitted votes cannot be changed)")){
-        throw new Error("Vote rejected")
-      }
-
-      // call "vote" function from smart contract
-      const { accounts, contract } = this.state;
-      await contract.methods.vote(idx).send({ from: accounts[0] });
-      console.log('voted on blockchain')
-
-      const token = localStorage.getItem('token')
-      const config ={
-        headers:{
-          "Content-type": "multipart/form-data",
-          "Authorization": "Bearer "+ token
-        }
-      }
-      const response = await axios.patch('/voter/vote',{}, config) // "const response" can be deleted ????????????
-      console.log("voted for "+idx)
-    }
-    catch(e){
-      alert("Vote was not processed")
-    }
-  }else{
-    alert("Voting Period Currently Closed");
-  }
-}
-
   render(){
     return(
       <div>  
@@ -138,7 +100,6 @@ Vote = async(idx)=>{
           <div>
             <img src={`http://localhost:4000/voter/candidate/${this.props.PartyName}/image`} width="150" height="150"></img>
           </div>
-            <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.Vote.bind(this,  this.props.Cand_index)}>Vote</Button>
           </Grid>
         </Paper>
     </Grid>
@@ -147,4 +108,4 @@ Vote = async(idx)=>{
     }
 }
 
-export default Candidate_view
+export default Candidate_view_admin;

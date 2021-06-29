@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-const paperStyle={padding :20,height:'40vh',width:300, margin:"20px auto"};
+const paperStyle={padding :20,height:'40vh',width:200, margin:"20px auto"};
 const avatarStyle={backgroundColor:'#1bbd7e'};
 const btnstyle={margin:'8px 0'};
 
@@ -132,12 +132,11 @@ Vote = async(idx)=>{
      <Grid>
        <Paper elevation={10} style={paperStyle}>
        <Grid align='center'>
-        <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-        <h1>Party: {this.props.PartyName}</h1>
+        <h3>Party: {this.props.PartyName}</h3>
     </Grid>
           <Grid align='center'>
           <div>
-            <img src={`http://localhost:4000/voter/candidate/${this.props.PartyName}/image`}></img>
+            <img src={`http://localhost:4000/voter/candidate/${this.props.PartyName}/image`} width="150" height="150"></img>
           </div>
             <Button type='submit' color='primary' variant="contained" style={btnstyle} onClick={this.Vote.bind(this,  this.props.Cand_index)}>Vote</Button>
           </Grid>
